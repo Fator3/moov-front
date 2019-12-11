@@ -1,5 +1,3 @@
-# real-world-vue
-
 ## Project setup
 ```
 npm install
