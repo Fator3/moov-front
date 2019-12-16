@@ -61,7 +61,7 @@ export default {
        const propertLocation = {latitude: this.properties[0].location.coordinates[0], longitude: this.properties[0].location.coordinates[1], secondsToArrive: 0}
 
           this.searchParams.references.forEach(reference => {
-            const distancePost = [propertLocation,reference]
+            const distancePost = {property: propertLocation, address: reference};
             PropertyService.getDistanceProperties(distancePost).then(result => {
               this.properties.forEach(function (value, i) {
                 const time = result.data[i+1].secondsToArrive/60
@@ -78,7 +78,7 @@ export default {
     }
   },
   async created() {
-    if (!this.searchParams || !this.searchParams.references[0].latitude) {
+    if (!this.searchParams || !this.searchParams.references[0]) {
       this.properties = (await PropertyService.getAllProperties()).data
     } else {
       PropertyService.getFilteredProperties(this.searchParams.references).then(

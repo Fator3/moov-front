@@ -6,8 +6,8 @@
     <v-card width="400" class="mx-auto mt-5">
       <v-card-text>
         <v-form>
-          <v-text-field label="Cidade" prepend-icon="mdi-map" />
-          <v-text-field label="Bairro" prepend-icon="mdi-map-marker-radius" />
+          <v-select :items="cityItems" label="Cidade" prepend-icon="mdi-map" />
+          <v-select :items="districtItems" label="Bairro" prepend-icon="mdi-map-marker-radius" />
           <v-text-field
             style="float: left;"
             label="Valor"
@@ -25,11 +25,8 @@
             :key="index"
             class="row"
           >
-            <div class="col-md-3">
-              <v-text-field v-model="reference.latitude" label="Lat" />
-            </div>
-            <div class="col-md-3">
-              <v-text-field v-model="reference.longitude" label="Lng" />
+            <div class="col-md-6">
+              <v-text-field v-model="searchParams.references[index]" label="Endereço" />
             </div>
             <div class="col-md-3">
               <v-text-field label="Minutes" />
@@ -59,19 +56,17 @@ export default {
       showPassword: false,
       searchParams: {
         rooms: '',
-        references: [{ latitude: '', longitude: '', secondsToArrive: '900', }]
-      }
+        references: ['']
+      },
+      cityItems: [{text: 'Todas as cidades', value: 'Todas as cidades'}],
+      districtItems: [{text: 'Todos os bairros', value: 'Todos os bairros'}]
     }
   },
   methods: {
     ...mapActions(['fetchProperties']),
     ...mapGetters(['getProperties']),
     addReference() {
-      this.searchParams.references.push({
-        latitude: '',
-        longitude: '',
-        secondsToArrive: ''
-      })
+      this.searchParams.references.push('')
     },
     search() {
       this.$router.push({

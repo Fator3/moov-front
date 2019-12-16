@@ -6,14 +6,13 @@
     <div class="row property-card -shadow">
       <div class="col-md-6">
         <span class="eyebrow">Bairro: {{ property.street }}</span>
-        <!-- <h4 class="title">{{ property.street }}</h4> -->
         <h4 class="title">Rua: {{ property.number }}</h4>
         <BaseIcon name="users">2 rooms</BaseIcon>
         <div>
           <span>Valor: R$ 3.000</span>
         </div>
         <v-divider></v-divider>
-        <div class="row">
+        <div class="row" style="max-height: 40px">
           <div
             class="col-md-6"
             v-for="(time, index) in property.secondsToArrive2"
