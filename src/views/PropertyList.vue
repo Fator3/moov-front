@@ -58,23 +58,21 @@ export default {
     ...mapGetters(['getProperties']),
     ...mapActions(['fetchProperties']),
     loadDistances() {
-       const propertLocation = {latitude: this.properties[0].location.coordinates[0], longitude: this.properties[0].location.coordinates[1], secondsToArrive: 0}
-
-          this.searchParams.references.forEach(reference => {
-            const distancePost = {property: propertLocation, address: reference};
+      this.properties.forEach(property => {
+        property.secondsToArrive2 = []
+        const propertLocation = {latitude: property.location.coordinates[0], longitude: property.location.coordinates[1], secondsToArrive: 0}
+        this.searchParams.references.forEach(reference => {
+          const distancePost = {property: propertLocation, address: reference};
+          setTimeout(() =>{
             PropertyService.getDistanceProperties(distancePost).then(result => {
-              this.properties.forEach(function (value, i) {
-                const time = result.data[i+1].secondsToArrive/60
-                value.secondsToArrive = (time+"").split('.')[0]
-                if(!value.secondsToArrive2){
-                  value.secondsToArrive2 = []
-                } 
-                value.secondsToArrive2.push((time+"").split('.')[0])
-                value.id = value.id+1
-                value.id = value.id-1
-              })
-            })  
-          })
+            const time = result.data[1].secondsToArrive/60
+            property.secondsToArrive2.push((time+"").split('.')[0])
+            property.id = property.id+1
+            property.id = property.id-1
+          })  
+          }, 1000)
+        })
+      })
     }
   },
   async created() {
