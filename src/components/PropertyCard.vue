@@ -1,7 +1,10 @@
 <template>
   <router-link
     class="property-link"
-    :to="{ name: 'property-show', params: { id: property.id } }"
+    :to="{
+      name: 'property-show',
+      params: { id: property.id, property: property }
+    }"
   >
     <div class="row property-card -shadow">
       <div class="col-md-6">

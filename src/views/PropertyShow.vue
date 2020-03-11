@@ -3,8 +3,8 @@
     <div class="property-header">
       <img src="../assets/imagem.jpg" id="picture" />
       <v-card class="card">
-      <h4>Bairro: {{ property.district }}</h4>
-      <h5>Rua: {{ property.street }}</h5>
+      <h4>Bairro: {{ property.street }}</h4>
+      <h5>Rua: {{ property.number }}</h5>
       <div class="row tags">
       <v-chip class="col-md-6">Valor: {{ property.price }}</v-chip>
       <v-chip
@@ -28,7 +28,9 @@
       <h2>Location</h2>
     </BaseIcon>
     <div>
-      <GoogleMapLoader :mapConfig="mapConfig" apiKey="AIzaSyCB08b33Ci4ZDF3qqh2Cwhn40PG3o02UGU"></GoogleMapLoader>
+      <GoogleMapLoader :mapConfig="mapConfig" apiKey="AIzaSyCB08b33Ci4ZDF3qqh2Cwhn40PG3o02UGU">
+        
+      </GoogleMapLoader>
     </div>
     </br>
     <v-card class="card">
@@ -76,31 +78,23 @@ export default {
   components: {
     GoogleMapLoader
   },
-  data() {
-    return {
-      property: {
-        time: 'time',
-        date: 'date',
-        title: 'title',
-        organizer: 'organizer',
-        category: 'categoria',
-        attendees: '2',
-        street: 'Augusto Perroni',
-        district: 'Butantã',
-        price: 'R$ 3000',
-        rooms: 2,
-        latitude: -23.573588,
-        longitude: -46.724252
-      }
-    }
-  },
+  props:['id', 'property'],
   computed: {
     mapConfig() {
       return {
         zoom: 15,
-        center: { lat: this.property.latitude, lng: this.property.longitude }
+        center: { lat: this.property.location.coordinates[0], lng: this.property.location.coordinates[1] }
       }
     }
+  },
+  created(){
+    this.property = {...this.property, price: 'R$ 3000',
+        rooms: 2,time: 'time',
+        date: 'date',
+        title: 'title',
+        organizer: 'organizer',
+        category: 'categoria',
+        attendees: '2'}
   }
 }
 </script>

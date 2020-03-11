@@ -34,7 +34,7 @@ const router = new Router({
       props: true
     },
     {
-      path: '/property/:id',
+      path: '/property/:id/:property',
       name: 'property-show',
       component: PropertyShow,
       props: true

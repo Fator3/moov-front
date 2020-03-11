@@ -1,3 +1,4 @@
+  
 <template>
   <div>
     </br>
@@ -23,13 +24,11 @@
 import PropertyCard from '@/components/PropertyCard.vue'
 import { mapGetters, mapActions } from 'vuex'
 import PropertyService from '@/services/PropertyService'
-
 function getPageEvents(routeTo, next) {
   const currentPage = parseInt(routeTo.query.page) || 1
   routeTo.params.page = currentPage
   next()
 }
-
 export default {
   data() {
     return {
@@ -57,22 +56,22 @@ export default {
   methods: {
     ...mapGetters(['getProperties']),
     ...mapActions(['fetchProperties']),
-    loadDistances() {
-      this.properties.forEach(property => {
+    async loadDistances() {
+      for(const property of this.properties){
+        const delay = interval => new Promise(resolve => setTimeout(resolve, interval));
+        await delay(300*this.searchParams.references.length);
         property.secondsToArrive2 = []
         const propertLocation = {latitude: property.location.coordinates[0], longitude: property.location.coordinates[1], secondsToArrive: 0}
         this.searchParams.references.forEach(reference => {
           const distancePost = {property: propertLocation, address: reference};
-          setTimeout(() =>{
             PropertyService.getDistanceProperties(distancePost).then(result => {
             const time = result.data[1].secondsToArrive/60
             property.secondsToArrive2.push((time+"").split('.')[0])
             property.id = property.id+1
             property.id = property.id-1
           })  
-          }, 1000)
         })
-      })
+      }
     }
   },
   async created() {

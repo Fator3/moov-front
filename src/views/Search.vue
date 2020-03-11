@@ -29,7 +29,7 @@
               <v-text-field v-model="searchParams.references[index]" label="Endereço" />
             </div>
             <div class="col-md-3">
-              <v-text-field label="Minutes" />
+              <v-text-field label="Minutes" readonly value="15"/>
             </div>
             <div class="col-md-3">
               <v-btn color="info" v-on:click="addReference">+</v-btn>
