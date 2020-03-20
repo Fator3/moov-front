@@ -21,12 +21,19 @@
             v-for="(time, index) in property.secondsToArrive2"
             :key="index"
           >
-            <v-chip class="ma-2" color="green" text-color="white">
-              <v-avatar left class="green darken-4">
-                {{ time || 'X' }}
-              </v-avatar>
-              min
-            </v-chip>
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on }">
+                <v-chip class="ma-2" color="green" text-color="white" v-on="on">
+                  <v-avatar left class="green darken-4">
+                    {{ time || 'X' }}
+                  </v-avatar>
+                  min
+                </v-chip>
+              </template>
+              <span>
+                {{ property.references[index] }}
+              </span>
+            </v-tooltip>
           </div>
         </div>
       </div>

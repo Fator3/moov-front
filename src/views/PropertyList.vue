@@ -2,6 +2,13 @@
 <template>
   <div>
     </br>
+    <v-skeleton-loader
+      v-if="loading"
+      class="mx-auto"
+      max-width="300"
+      type="card"
+    ></v-skeleton-loader>
+    <p v-if="!loading && properties.length == 0">Não foram encontradas propriedades para essa busca</p>
     <PropertyCard
       v-for="property in properties"
       :key="property.id"
@@ -32,7 +39,8 @@ function getPageEvents(routeTo, next) {
 export default {
   data() {
     return {
-      properties: []
+      properties: [],
+      loading : true,
     }
   },
   props: {
@@ -61,12 +69,16 @@ export default {
         const delay = interval => new Promise(resolve => setTimeout(resolve, interval));
         await delay(300*this.searchParams.references.length);
         property.secondsToArrive2 = []
+        property.references = []
+        property.tooltips = []
         const propertLocation = {latitude: property.location.coordinates[0], longitude: property.location.coordinates[1], secondsToArrive: 0}
         this.searchParams.references.forEach(reference => {
           const distancePost = {property: propertLocation, address: reference};
             PropertyService.getDistanceProperties(distancePost).then(result => {
             const time = result.data[1].secondsToArrive/60
             property.secondsToArrive2.push((time+"").split('.')[0])
+            property.references.push(reference)
+            property.tooltips.push(false)
             property.id = property.id+1
             property.id = property.id-1
           })  
@@ -78,10 +90,11 @@ export default {
     if (!this.searchParams || !this.searchParams.references[0]) {
       this.properties = (await PropertyService.getAllProperties()).data
     } else {
-      PropertyService.getFilteredProperties(this.searchParams.references).then(
+      PropertyService.getFilteredProperties(this.searchParams).then(
         response => {
           this.properties = response.data
           this.loadDistances()
+          this.loading = false;
         }
       )
     }

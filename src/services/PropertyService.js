@@ -13,8 +13,8 @@ export default {
   getAllProperties() {
     return apiClient.post('/property/all')
   },
-  getFilteredProperties(references) {
-    return apiClient.post('/property/filter', references)
+  getFilteredProperties(searchParams) {
+    return apiClient.post('/property/filter', searchParams)
   },
   getDistanceProperties(route) {
     return apiClient.post('/property/time', route)

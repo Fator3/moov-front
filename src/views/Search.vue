@@ -12,6 +12,7 @@
             style="float: left;"
             label="Valor"
             prepend-icon="mdi-cash-multiple"
+            v-model="searchParams.value"
           />
           <v-text-field
             label="Quartos"
@@ -29,7 +30,7 @@
               <v-text-field v-model="searchParams.references[index]" label="Endereço" />
             </div>
             <div class="col-md-3">
-              <v-text-field label="Minutes" readonly value="15"/>
+              <v-text-field label="Minutes" v-model="searchParams.referencesMinutes[index]"/>
             </div>
             <div class="col-md-3">
               <v-btn color="info" v-on:click="addReference">+</v-btn>
@@ -56,7 +57,9 @@ export default {
       showPassword: false,
       searchParams: {
         rooms: '',
-        references: ['']
+        value:'',
+        references: [''],
+        referencesMinutes : [''],
       },
       cityItems: [{text: 'Todas as cidades', value: 'Todas as cidades'}],
       districtItems: [{text: 'Todos os bairros', value: 'Todos os bairros'}]
@@ -67,6 +70,7 @@ export default {
     ...mapGetters(['getProperties']),
     addReference() {
       this.searchParams.references.push('')
+      this.searchParams.referencesMinutes.push('')
     },
     search() {
       this.$router.push({
