@@ -8,21 +8,26 @@
       max-width="300"
       type="card"
     ></v-skeleton-loader>
+    
     <p v-if="!loading && properties.length == 0">Não foram encontradas propriedades para essa busca</p>
+    
     <PropertyCard
-      v-for="property in properties"
-      :key="property.id"
+      v-for="(property,index) in loadedProperties"
+      :key="'prop'+index"
       :property="property"
     />
-
-    <template v-if="page != 1">
+    
+    <scroll-loader :loader-method="getPropertiesList" :loader-disable="disable">
+      
+    </scroll-loader> 
+    <!-- <template v-if="page != 1">
       <router-link :to="{ name: 'list', query: { page: page - 1 } }" rel="prev"
         >Prev Page</router-link
       >|
     </template>
     <router-link :to="{ name: 'list', query: { page: page + 1 } }"
       >Next Page</router-link
-    >
+    > -->
     <BaseIcon />
   </div>
 </template>
@@ -31,6 +36,12 @@
 import PropertyCard from '@/components/PropertyCard.vue'
 import { mapGetters, mapActions } from 'vuex'
 import PropertyService from '@/services/PropertyService'
+import Vue from 'vue'
+import ScrollLoader from 'vue-scroll-loader'
+
+Vue.use(ScrollLoader)
+
+
 function getPageEvents(routeTo, next) {
   const currentPage = parseInt(routeTo.query.page) || 1
   routeTo.params.page = currentPage
@@ -40,7 +51,12 @@ export default {
   data() {
     return {
       properties: [],
+      loadedProperties: [],
       loading : true,
+      disable: false,
+      maxIterations: 5,
+      currentIndex: 0,
+      
     }
   },
   props: {
@@ -64,14 +80,28 @@ export default {
   methods: {
     ...mapGetters(['getProperties']),
     ...mapActions(['fetchProperties']),
+
     async loadDistances() {
-      for(const property of this.properties){
+      
+      for(var i=0; i < this.maxIterations; i++){
+
+      	if(this.currentIndex > this.properties.length-1) {
+          this.disable = true;
+          break;
+        }
+
+        this.disable = this.properties.length < this.maxIterations
+
+        const property = this.properties[this.currentIndex++]
+
+        this.loadedProperties.push(property)
+
         const delay = interval => new Promise(resolve => setTimeout(resolve, interval));
-        await delay(300*this.searchParams.references.length);
+        await delay(500*this.searchParams.references.length);
         property.secondsToArrive2 = []
         property.references = []
         property.tooltips = []
-        const propertLocation = {latitude: property.location.coordinates[0], longitude: property.location.coordinates[1], secondsToArrive: 0}
+        const propertLocation = {latitude: property.latitude, longitude: property.longitude, secondsToArrive: 0}
         this.searchParams.references.forEach(reference => {
           const distancePost = {property: propertLocation, address: reference};
             PropertyService.getDistanceProperties(distancePost).then(result => {
@@ -84,26 +114,43 @@ export default {
           })  
         })
       }
-    }
+    },
+    getPropertiesList() {
+      
+      PropertyService.getFilteredProperties(this.searchParams).then(
+        response => {
+          this.properties = response.data
+          this.loadDistances()
+          this.loading = false;
+          console.log("Properties size: ", response.data.length)
+          this.disable = response.data.length < this.maxIterations
+        }
+      )
+    },
   },
   async created() {
+    
     if (!this.searchParams || !this.searchParams.references[0]) {
       this.properties = (await PropertyService.getAllProperties()).data
+      console.log("all")
     } else {
       PropertyService.getFilteredProperties(this.searchParams).then(
         response => {
           this.properties = response.data
           this.loadDistances()
           this.loading = false;
+          console.log("Size: ", response.data.length)
+          this.disable = response.data.length < this.maxIterations
         }
       )
     }
   },
+  
   computed: {
     hasNextPage() {
       return true
       // this.event.eventsTotal > this.page * this.event.perPage
     }
-  }
+  },
 }
 </script>
