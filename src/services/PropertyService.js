@@ -18,5 +18,13 @@ export default {
   },
   getDistanceProperties(route) {
     return apiClient.post('/property/time', route)
+  },
+  getRandomNProperties(limit) {
+    return apiClient.get('property/random/' + limit)
+  },
+  getCities() {
+    return axios.get(
+      'https://servicodados.ibge.gov.br/api/v1/localidades/municipios'
+    )
   }
 }

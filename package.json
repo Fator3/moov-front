@@ -23,7 +23,8 @@
     "vuejs-datepicker": "^1.6.2",
     "vuelidate": "^0.7.4",
     "vuetify": "^2.1.0",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "@mdi/js": "^4.5.95"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.11.0",
