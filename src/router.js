@@ -6,7 +6,7 @@ import PropertyShow from './views/PropertyShow.vue'
 import NProgress from 'nprogress'
 import NotFound from './views/NotFound.vue'
 import NetworkIssue from './views/NetworkIssue.vue'
-import Search from './views/Search.vue'
+import FrontPage from './views/FrontPage.vue'
 import Map from './views/Map.vue'
 
 Vue.use(Router)
@@ -18,7 +18,7 @@ const router = new Router({
     {
       path: '/',
       name: 'search',
-      component: Search,
+      component: FrontPage,
       props: true
     },
     {
