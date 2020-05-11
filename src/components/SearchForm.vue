@@ -27,21 +27,21 @@
         ><v-autocomplete
           solo
           v-model="searchParams.city"
+          :value="searchParams.city"
           :items="items"
           item-text="nome"
-          item-value="id"
+          item-value="nome"
           :search-input.sync="search"
           :loading="isLoading"
           hide-no-data
           hide-selected
-          return-object
           placeholder="Digite a cidade"
         ></v-autocomplete
       ></v-col>
     </v-row>
     <v-row v-for="(reference, index) in references" :key="'ref' + index">
-      <v-col
-        ><label>Ponto de referência</label
+      <v-col class="pb-0"
+        ><label v-if="index == 0">Ponto de referência</label
         ><v-text-field
           solo
           placeholder="Adicione uma referência"
@@ -56,21 +56,25 @@
           >
         </v-text-field></v-col
       >
-      <v-col
-        ><label>Tempo em minutos</label
+      <v-col class="pb-0"
+        ><label v-if="index == 0">Tempo em minutos</label
         ><v-text-field
           solo
           placeholder="Até a referência"
           v-model="reference.time"
         ></v-text-field
       ></v-col>
-      <v-col
-        ><label>Meio de transporte</label
+      <v-col class="pb-0"
+        ><label v-if="index == 0">Meio de transporte</label
         ><v-select
           solo
-          :items="['Carro', 'Transporte público', 'A pé']"
+          :items="[
+            { text: 'Carro', value: 'car' },
+            { text: 'Transporte público', value: 'bus' },
+            { text: 'A pé', value: 'pedestrian' }
+          ]"
           placeholder="Selecione"
-          v-model="reference.trnasport"
+          v-model="reference.transport"
         ></v-select
       ></v-col>
     </v-row>
@@ -111,7 +115,8 @@ export default {
         {
           address: '',
           time: '',
-          transport: ''
+          transport: '',
+          routeTime: 0
         }
       ],
       searchParams: {
@@ -139,9 +144,9 @@ export default {
           entry.nome.length > this.descriptionLimit
             ? entry.nome.slice(0, this.descriptionLimit) +
               '...' +
-              ' / ' +
+              ' - ' +
               entry.microrregiao.mesorregiao.UF.sigla
-            : entry.nome + ' / ' + entry.microrregiao.mesorregiao.UF.sigla
+            : entry.nome + ' - ' + entry.microrregiao.mesorregiao.UF.sigla
 
         return Object.assign({}, entry, { nome: Description, id: entry.id })
       })
@@ -172,7 +177,12 @@ export default {
   },
   methods: {
     addReference() {
-      this.references.push({ address: '', time: '', transport: '' })
+      this.references.push({
+        address: '',
+        time: '',
+        transport: '',
+        routeTime: 0
+      })
     },
     clean() {
       this.references = [
@@ -190,11 +200,21 @@ export default {
       }
     },
     searchProperties() {
+      console.log(this.references)
       this.searchParams.references = this.references
-      this.$router.push({
-        name: 'list',
-        params: { searchParams: this.searchParams }
-      })
+        .filter(
+          r =>
+            r.address != null &&
+            r.address.length > 0 &&
+            !isNaN(parseInt(r.time))
+        )
+        .map(r => ({
+          address: r.address,
+          time: parseInt(r.time),
+          transport: r.transport == null ? 'car' : r.transport,
+          routeTime: 0
+        }))
+      this.$emit('search', this.searchParams)
     }
   },
   created() {
@@ -216,5 +236,8 @@ export default {
 }
 .search-buttons button {
   border-radius: 7px;
+}
+.v-text-field__details {
+  display: none !important;
 }
 </style>
