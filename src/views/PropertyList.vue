@@ -36,10 +36,8 @@
 import PropertyCard from '@/components/PropertyCard.vue'
 import { mapGetters, mapActions } from 'vuex'
 import PropertyService from '@/services/PropertyService'
-import Vue from 'vue'
-import ScrollLoader from 'vue-scroll-loader'
 
-Vue.use(ScrollLoader)
+
 
 
 function getPageEvents(routeTo, next) {
@@ -122,7 +120,6 @@ export default {
           this.properties = response.data
           this.loadDistances()
           this.loading = false;
-          console.log("Properties size: ", response.data.length)
           this.disable = response.data.length < this.maxIterations
         }
       )
@@ -132,14 +129,12 @@ export default {
     
     if (!this.searchParams || !this.searchParams.references[0]) {
       this.properties = (await PropertyService.getAllProperties()).data
-      console.log("all")
     } else {
       PropertyService.getFilteredProperties(this.searchParams).then(
         response => {
           this.properties = response.data
           this.loadDistances()
           this.loading = false;
-          console.log("Size: ", response.data.length)
           this.disable = response.data.length < this.maxIterations
         }
       )
