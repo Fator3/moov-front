@@ -5,7 +5,7 @@
         <span class="white--text">O tempo é agora. </span
         ><span class="secondary--text">Qual<br />vida você quer viver?</span>
       </v-sheet>
-      <SearchForm />
+      <SearchForm v-on:search="listProperties" />
     </v-sheet>
     <ConceptVideo />
     <PropertyScroll
@@ -54,14 +54,10 @@ export default {
   methods: {
     ...mapActions(['fetchProperties']),
     ...mapGetters(['getProperties']),
-    addReference() {
-      this.searchParams.references.push('')
-      this.searchParams.referencesMinutes.push('')
-    },
-    listProperties() {
+    listProperties(searchParams) {
       this.$router.push({
         name: 'list',
-        params: { searchParams: this.searchParams }
+        params: { searchParams: searchParams }
       })
     }
   },
