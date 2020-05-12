@@ -1,13 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import PropertyCreate from './views/PropertyCreate.vue'
 import PropertyList from './views/PropertyList.vue'
-import PropertyShow from './views/PropertyShow.vue'
+import PropertyDetails from './views/PropertyDetails.vue'
 import NProgress from 'nprogress'
 import NotFound from './views/NotFound.vue'
-import NetworkIssue from './views/NetworkIssue.vue'
 import FrontPage from './views/FrontPage.vue'
-import Map from './views/Map.vue'
 
 Vue.use(Router)
 
@@ -34,26 +31,16 @@ const router = new Router({
       props: true
     },
     {
-      path: '/property/:id/:property',
+      path: '/property',
       name: 'property-show',
-      component: PropertyShow,
+      component: PropertyDetails,
       props: true
-    },
-    {
-      path: '/create',
-      name: 'create',
-      component: PropertyCreate
     },
     {
       path: '/404',
       name: '404',
       component: NotFound,
       props: true
-    },
-    {
-      path: '/network-issue',
-      name: 'network-issue',
-      component: NetworkIssue
     },
     {
       path: '*',

@@ -2,7 +2,7 @@
   <div>
     <h1>Oops!</h1>
     <h3>The page you're looking for is not here.</h3>
-    <router-link :to="{ name: 'list'}">Back to the home page</router-link>
+    <router-link :to="{ name: 'list' }">Back to the home page</router-link>
   </div>
 </template>
 
@@ -14,8 +14,7 @@ export default {
       required: true
     }
   }
-};
+}
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

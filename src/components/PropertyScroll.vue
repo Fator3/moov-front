@@ -1,6 +1,6 @@
 <template>
   <v-container class="wrapper">
-    <v-container class="d-flex">
+    <v-container class="d-flex align-center px-8" fluid v-if="title">
       <v-divider color="#D8D8D8" />
       <span class="primary--text scroll-title mx-4">{{ title }}</span>
       <v-divider color="#D8D8D8" />
@@ -13,8 +13,18 @@
       >
         <v-row class="mx-4 align-center fill-height">
           <v-col :key="j" v-for="j in 3" cols="4" class="fill-height">
-            <v-card class="primary--text elevation-2 fill-height" color="white">
-              <v-img src="@/assets/images/frontpage-background.png" />
+            <v-card
+              class="primary--text elevation-2 fill-height"
+              color="white"
+              :to="{
+                name: 'property-show',
+                params: {
+                  id: properties[i - 1 + (j - 1)].id,
+                  property: properties[i - 1 + (j - 1)]
+                }
+              }"
+            >
+              <v-img :src="properties[i - 1 + (j - 1)].pics[0]" />
               <v-card-subtitle class="pa-3 pb-1 caption white property-type">{{
                 properties[i - 1 + (j - 1)].type
               }}</v-card-subtitle>

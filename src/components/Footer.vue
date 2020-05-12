@@ -1,24 +1,24 @@
 <template>
   <v-container class="wrapper" fluid>
     <v-row class="justify-space-between footer">
-      <v-col class="px-0 pt-8 d-flex flex-column align-start" cols="4">
+      <v-col class="pa-0 d-flex flex-column align-start mx-0" cols="4">
         <v-img
-          height="42"
           src="@/assets/images/logo.png"
-          contain
-          class="flex-grow-0 mb-4 flex-shrink-1 pa-0 mx-0"
+          class="flex-grow-0 mb-8 flex-shrink-1 pa-0 mx-0"
         />
-        <span>
-          Nossa missão é oferecer a praticidade ao buscar por uma nova moradia,
-          tendo em vista o valor que é estar próximo de lugares que você ama e
-          tem prazer de estar vínculado.
-        </span>
+        <span class="mb-4"> (11) 98787-0203<br />contato@nudoor.com.br </span>
         <v-sheet color="transparent">
-          <span class="primary--text">O tempo é agora. </span
+          <span class="primary--text">O tempo é agora. <br /></span
           ><span class="secondary--text"
-            >Qual<br />vida você quer viver?</span
+            >Qual vida você quer viver?</span
           ></v-sheet
         >
+        <span class="mt-4 font-weight-bold">Siga-nos:</span>
+        <v-sheet class="d-flex mt-2" color="transparent">
+          <v-img src="@/assets/images/icon_facebook.png" class="mr-4" />
+          <v-img src="@/assets/images/icon_instagram.png" class="mr-4" />
+          <v-img src="@/assets/images/icon_linkedin.png" />
+        </v-sheet>
       </v-col>
       <v-col class="links d-flex flex-column align-start" cols="4">
         <v-btn light text to="/" class="text-none">Início</v-btn>
@@ -50,6 +50,6 @@
   background-color: transparent;
 }
 .footer {
-  padding: 40px 80px;
+  padding: 25px 50px;
 }
 </style>

@@ -17,7 +17,7 @@
     <v-col cols="7">
       <v-img
         height="400"
-        src="@/assets/images/frontpage-background.png"
+        src="@/assets/images/concept_image.png"
         contain
         class="flex-grow-0"
       />

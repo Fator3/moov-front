@@ -39,7 +39,11 @@
         ></v-autocomplete
       ></v-col>
     </v-row>
-    <v-row v-for="(reference, index) in references" :key="'ref' + index">
+    <v-row
+      v-for="(reference, index) in references"
+      :key="'ref' + index"
+      class="reference-row"
+    >
       <v-col class="pb-0"
         ><label v-if="index == 0">Ponto de referência</label
         ><v-text-field
@@ -171,6 +175,7 @@ export default {
         })
         .catch(err => {
           console.log(err)
+          console.log(val)
         })
         .finally(() => (this.isLoading = false))
     }
@@ -200,7 +205,6 @@ export default {
       }
     },
     searchProperties() {
-      console.log(this.references)
       this.searchParams.references = this.references
         .filter(
           r =>
@@ -226,7 +230,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #search-form {
   background: transparent;
 }
@@ -237,7 +241,9 @@ export default {
 .search-buttons button {
   border-radius: 7px;
 }
-.v-text-field__details {
+</style>
+<style>
+.reference-row .v-text-field__details {
   display: none !important;
 }
 </style>

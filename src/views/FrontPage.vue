@@ -37,6 +37,7 @@ import SearchForm from '@/components/SearchForm.vue'
 import ConceptVideo from '@/components/ConceptVideo.vue'
 import PropertyScroll from '@/components/PropertyScroll.vue'
 import nudoor from '@/services/PropertyService'
+import pics from '@/pics.js'
 
 export default {
   name: 'FrontPage',
@@ -59,16 +60,50 @@ export default {
         name: 'list',
         params: { searchParams: searchParams }
       })
+    },
+    getRandomPics(property) {
+      let p = []
+      const homeTypes = ['Casa', 'Sobrado', 'Sítio']
+      const apTypes = [
+        'Apartamento Duplex',
+        'Apartamento',
+        'Cobertura',
+        'Studio',
+        'Kitnet',
+        'Loft',
+        'Apartamento Garden'
+      ]
+      if (homeTypes.includes(property.type)) {
+        p = pics.home[Math.ceil(Math.random() * 4)]
+      } else if (apTypes.includes(property.type)) {
+        p = pics.ap[Math.ceil(Math.random() * 2)]
+      } else {
+        for (let i = 1; i <= 4; i++) {
+          p.push(require('../assets/images/frontpage-background.png'))
+        }
+      }
+
+      return { ...property, pics: p }
     }
   },
   created() {
-    nudoor.getRandomNProperties(12).then(res => (this.newProperties = res.data))
     nudoor
       .getRandomNProperties(12)
-      .then(res => (this.featuredProperties = res.data))
+      .then(
+        res => (this.newProperties = res.data.map(p => this.getRandomPics(p)))
+      )
     nudoor
       .getRandomNProperties(12)
-      .then(res => (this.recentProperties = res.data))
+      .then(
+        res =>
+          (this.featuredProperties = res.data.map(p => this.getRandomPics(p)))
+      )
+    nudoor
+      .getRandomNProperties(12)
+      .then(
+        res =>
+          (this.recentProperties = res.data.map(p => this.getRandomPics(p)))
+      )
   }
 }
 </script>
