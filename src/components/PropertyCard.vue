@@ -9,7 +9,7 @@
     <v-sheet class="primary--text elevation-2 my-8" color="white">
       <v-row dense no-gutters class="">
         <v-col cols="4" dense class="">
-          <v-img src="@/assets/images/property.png" cover height="100%" />
+          <v-img :src="property.pics[0]" cover height="100%" />
         </v-col>
 
         <v-col class="pa-4">
@@ -52,7 +52,7 @@
             </v-sheet>
             <v-sheet class="d-flex mt-5">
               <v-sheet
-                v-for="(reference, index) in references"
+                v-for="(reference, index) in property.references"
                 class="time-chip d-flex flex-column text-center py-1 px-5 mr-4 primary--text"
                 :key="'ref' + index"
               >
@@ -83,8 +83,7 @@
 export default {
   props: {
     property: Object,
-    isRent: Boolean,
-    references: Array
+    isRent: Boolean
   },
   data() {
     return {

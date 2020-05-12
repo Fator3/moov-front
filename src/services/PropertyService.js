@@ -26,5 +26,8 @@ export default {
     return axios.get(
       'https://servicodados.ibge.gov.br/api/v1/localidades/municipios'
     )
+  },
+  sendMessage(leadMessage) {
+    return apiClient.post('/property/message', leadMessage)
   }
 }

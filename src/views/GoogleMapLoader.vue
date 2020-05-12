@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <div id="map" class="google-map" ref="googleMap"></div>
+  <div id="map" class="google-map" ref="googleMap">
     <template v-if="Boolean(this.google) && Boolean(this.map)">
       <map-provider :google="google" :map="map">
         <slot />
@@ -47,7 +46,7 @@ export default {
 
 <style scoped>
 #map {
-  height: 320px;
+  height: 100%;
   width: 100%;
 }
 </style>

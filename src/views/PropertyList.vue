@@ -13,7 +13,6 @@
         v-for="(property, index) in loadedProperties"
         :property="property"
         :isRent="searchParams.isRent"
-        :references="property.references"
         :key="'prop' + index"
       />
     </v-container>
@@ -27,6 +26,7 @@ import PropertyCard from '@/components/PropertyCard.vue'
 import { mapGetters, mapActions } from 'vuex'
 import PropertyService from '@/services/PropertyService'
 import SearchForm from '@/components/SearchForm.vue'
+import pics from '@/pics.js'
 
 function getPageEvents(routeTo, next) {
   const currentPage = parseInt(routeTo.query.page) || 1
@@ -38,10 +38,10 @@ export default {
     return {
       properties: [],
       loadedProperties: [],
-      loading: true,
       disable: false,
       maxIterations: 5,
-      currentIndex: 0
+      currentIndex: 0,
+      isLoading: false
     }
   },
   props: {
@@ -66,13 +66,17 @@ export default {
   methods: {
     ...mapGetters(['getProperties']),
     ...mapActions(['fetchProperties']),
-    getMoreProperties() {
-      if (this.properties.length == 0) {
+    async getMoreProperties() {
+      if (this.properties.length == 0 || this.isLoading) {
         return
       }
+      const delay = interval =>
+        new Promise(resolve => setTimeout(resolve, interval))
+      await delay(1000)
       this.loadDistances()
     },
     async loadDistances() {
+      this.isLoading = true
       for (var i = 0; i < this.maxIterations; i++) {
         if (this.currentIndex > this.properties.length - 1) {
           this.disable = true
@@ -88,13 +92,17 @@ export default {
           longitude: property.longitude,
           secondsToArrive: 0
         }
+        const delay = interval =>
+          new Promise(resolve => setTimeout(resolve, interval))
+        await delay(500 * property.references.length)
+
         property.references.forEach(reference => {
           const distancePost = {
             property: propertLocation,
             address: reference.address,
             transport: reference.transport
           }
-          console.log(property)
+
           PropertyService.getDistanceProperties(distancePost).then(result => {
             const time = result.data[1].secondsToArrive / 60
             reference.routeTime = (time + '').split('.')[0]
@@ -102,6 +110,7 @@ export default {
         })
         this.loadedProperties.push(property)
       }
+      this.isLoading = false
     },
     async loadProperties(searchParams) {
       this.properties = []
@@ -114,16 +123,41 @@ export default {
         !this.searchParams.references[0] ||
         this.searchParams.references[0].address == ''
       ) {
-        this.properties = (await PropertyService.getAllProperties()).data
+        this.properties = (await PropertyService.getAllProperties()).map(p =>
+          this.getRandomPics(p)
+        )
       } else {
         PropertyService.getFilteredProperties(this.searchParams).then(
           response => {
-            this.properties = response.data
+            this.properties = response.data.map(p => this.getRandomPics(p))
             this.loadDistances()
-            this.loading = false
           }
         )
       }
+    },
+    getRandomPics(property) {
+      let p = []
+      const homeTypes = ['Casa', 'Sobrado', 'Sítio']
+      const apTypes = [
+        'Apartamento Duplex',
+        'Apartamento',
+        'Cobertura',
+        'Studio',
+        'Kitnet',
+        'Loft',
+        'Apartamento Garden'
+      ]
+      if (homeTypes.includes(property.type)) {
+        p = pics.home[Math.ceil(Math.random() * 4)]
+      } else if (apTypes.includes(property.type)) {
+        p = pics.ap[Math.ceil(Math.random() * 2)]
+      } else {
+        for (let i = 1; i <= 4; i++) {
+          p.push(require('../assets/images/frontpage-background.png'))
+        }
+      }
+
+      return { ...property, pics: p }
     }
   },
   created() {
