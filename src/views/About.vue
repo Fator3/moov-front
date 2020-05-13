@@ -24,21 +24,21 @@
         </v-col>
       </v-row>
       <v-divider></v-divider>
-      <v-row no-gutters class="d-flex flex-row align-center">
+      <v-row class="d-flex flex-row align-center">
         <v-col class="d-flex flex-column justify-center mb-3">
-          <img class="img-size" src="../assets/images/icon-confort.png" />
+          <img class="img-icon-size" src="../assets/images/icon-confort.png"  />
           <span class="text-icon">Conforto</span>
         </v-col>
         <v-col class="d-flex flex-column justify-center mb-3">
-          <img class="img-size" src="../assets/images/icon-safety.png" />
+          <img class="img-icon-size" src="../assets/images/icon-safety.png" />
           <span class="text-icon">Segurança</span>
         </v-col>
         <v-col class="d-flex flex-column justify-center mb-3">
-          <img class="img-size" src="../assets/images/icon-key.png" />
+          <img class="img-icon-size" src="../assets/images/icon-key.png" />
           <span class="text-icon">Facilidade</span>
         </v-col>
         <v-col class="d-flex flex-column justify-center mb-3">
-          <img src="../assets/images/icon-home.png" class="img-size" />
+          <img src="../assets/images/icon-home.png" class="img-icon-size" />
           <span class="text-icon">Novo lar</span>
         </v-col>
       </v-row>
@@ -198,10 +198,10 @@ export default {}
   position: absolute;
   padding-top: 84px;
 }
-.img-size {
+.img-icon-size {
   margin-top: 40px;
-  width: 31px;
-  height: 31px;
+  width: 81px;
+  height: 81px;
   display: flex;
   margin-left: auto;
   margin-right: auto;
@@ -210,13 +210,14 @@ export default {}
   font-family: Roboto;
   font-style: normal;
   font-weight: 400;
-  font-size: 20px;
+  font-size: 30px;
   line-height: 35px;
   margin-bottom: 20px;
   letter-spacing: 1.02px;
   margin-left: auto;
   margin-right: auto;
   color: #34B6F2;
+  padding-top: 4%;
 }
 .text-style-tertiary {
   color: #34B6F2;
@@ -240,8 +241,6 @@ export default {}
   font-weight: normal;
   font-size: 30px;
   line-height: 35px;
-  /* display: flex;
-  align-items: center; */
   letter-spacing: 1.02px;
   padding-top: 20px;
   color: #454646;
