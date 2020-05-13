@@ -26,7 +26,7 @@
       <v-divider></v-divider>
       <v-row class="d-flex flex-row align-center">
         <v-col class="d-flex flex-column justify-center mb-3">
-          <img class="img-icon-size" src="../assets/images/icon-confort.png"  />
+          <img class="img-icon-size" src="../assets/images/icon-confort.png" style="width: 72.76px" />
           <span class="text-icon">Conforto</span>
         </v-col>
         <v-col class="d-flex flex-column justify-center mb-3">
