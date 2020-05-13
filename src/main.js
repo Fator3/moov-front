@@ -9,11 +9,17 @@ import Vuelidate from 'vuelidate'
 import DateFilter from './filters/date'
 import vuetify from './plugins/vuetify'
 import ScrollLoader from 'vue-scroll-loader'
+import VueAnalytics from 'vue-analytics'
 
 Vue.filter('date', DateFilter)
 Vue.use(Vuelidate)
 Vue.config.productionTip = false
 Vue.use(ScrollLoader)
+
+Vue.use(VueAnalytics, {
+  id: 'UA-162394288-1',
+  router
+})
 
 const requireComponent = require.context(
   './components',
