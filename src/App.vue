@@ -42,7 +42,7 @@ export default {
         },
         {
           label: 'Quem somos?',
-          url: '/list'
+          url: '/about'
         }
       ]
     }
