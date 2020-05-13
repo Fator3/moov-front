@@ -25,12 +25,6 @@ const router = new Router({
             props: true
         },
         {
-            path: '/map',
-            name: 'map',
-            component: Map,
-            props: true
-        },
-        {
             path: '/list',
             name: 'list',
             component: PropertyList,
@@ -38,7 +32,7 @@ const router = new Router({
         },
         {
             path: '/property',
-            name: 'property-show',
+            name: 'details',
             component: PropertyDetails,
             props: true
         },

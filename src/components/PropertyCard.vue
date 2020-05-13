@@ -1,12 +1,5 @@
 <template>
-  <router-link
-    class="property-link "
-    :to="{
-      name: 'property-show',
-      params: { id: property.id, property: property }
-    }"
-  >
-    <v-sheet class="primary--text elevation-2 my-8" color="white">
+    <v-sheet @click="openProperty()" class="primary--text elevation-2 my-8" color="white" style="cursor:pointer">
       <v-row dense no-gutters class="">
         <v-col cols="4" dense class="">
           <v-img :src="property.pics[0]" cover height="100%" />
@@ -76,7 +69,6 @@
         </v-col>
       </v-row>
     </v-sheet>
-  </router-link>
 </template>
 
 <script>
@@ -118,6 +110,14 @@ export default {
     }
   },
   methods: {
+    
+    openProperty(){
+      this.$ga.event('property', 'click', 'list', {'dimension9' : JSON.stringify(this.property)})
+      this.$router.push({
+        name: 'details',
+       params: { id: this.property.id, property: this.property }
+      })
+    },
     formatPrice(property) {
       let price = 0
       if (this.localIsRent) {
@@ -189,9 +189,6 @@ export default {
   letter-spacing: 0.03px;
 
   color: #949494;
-}
-.property-link {
-  text-decoration: none;
 }
 .time-chip {
   background: rgba(127, 86, 195, 0.3);

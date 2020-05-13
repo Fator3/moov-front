@@ -1,7 +1,7 @@
 <template>
   <v-container class="ma-0 pa-0 wrapper" fluid>
     <v-sheet id="search" class="py-8">
-      <SearchForm :searchInput="searchParams" v-on:search="loadProperties" />
+      <SearchForm :searchInput="searchParams" v-on:search="loadNewProperties" />
     </v-sheet>
     <v-container fluid class="search-result pt-8">
       <span class="total">{{
@@ -70,6 +70,8 @@ export default {
       if (this.properties.length == 0 || this.isLoading) {
         return
       }
+      this.$ga.event('property', 'scroll', 'list')
+
       const delay = interval =>
         new Promise(resolve => setTimeout(resolve, interval))
       await delay(1000)
@@ -111,6 +113,15 @@ export default {
         this.loadedProperties.push(property)
       }
       this.isLoading = false
+    },
+    loadNewProperties(searchParams){
+      this.$ga.event('search', 'search', 'listPage', {
+        'dimension1': searchParams.city,
+        'dimension2': searchParams.type,
+        'dimension3': searchParams.isRent,
+        'dimension4': JSON.stringify(searchParams.references)
+      })
+      this.loadProperties(searchParams)
     },
     async loadProperties(searchParams) {
       this.properties = []

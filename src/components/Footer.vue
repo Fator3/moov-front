@@ -21,8 +21,9 @@
         </v-sheet>
       </v-col>
       <v-col class="links d-flex flex-column align-start" cols="4">
-        <v-btn light text to="/" class="text-none">Início</v-btn>
-        <v-btn text to="/" class="text-none">Quem somos?</v-btn>
+        <v-btn light text to="/" class="text-none" @click="$ga.event('link', 'click', 'home-footer')"
+>Início</v-btn>
+        <v-btn text to="/about" class="text-none" @click="$ga.event('link', 'click', 'about-footer')">Quem somos?</v-btn>
       </v-col>
     </v-row>
   </v-container>

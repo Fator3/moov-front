@@ -182,6 +182,7 @@ export default {
   },
   methods: {
     addReference() {
+      this.$ga.event('button', 'click', 'add-reference')
       this.references.push({
         address: '',
         time: '',
@@ -190,6 +191,7 @@ export default {
       })
     },
     clean() {
+      this.$ga.event('button', 'click', 'clear-search')
       this.references = [
         {
           address: '',
@@ -205,6 +207,7 @@ export default {
       }
     },
     searchProperties() {
+      this.$ga.event('button', 'click', 'search')
       this.searchParams.references = this.references
         .filter(
           r =>

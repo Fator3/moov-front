@@ -17,7 +17,8 @@ Vue.config.productionTip = false
 Vue.use(ScrollLoader)
 
 Vue.use(VueAnalytics, {
-  id: 'UA-162394288-1'
+  id: 'UA-162394288-1',
+  router
 })
 
 const requireComponent = require.context(

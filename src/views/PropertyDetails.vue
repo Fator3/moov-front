@@ -1,6 +1,6 @@
 <template>
   <v-container fluid class="pa-0 ma-0 d-flex flex-column">
-    <v-slide-group class="align-self-center">
+    <v-slide-group class="align-self-center" ref="top">
       <v-slide-item
         v-for="(pic, index) in property.pics"
         :key="'pic' + index"
@@ -20,7 +20,7 @@
           <span class="font-weight-bold">{{ property.type }}</span>
           <v-dialog v-model="showMap">
             <template v-slot:activator="{ on }">
-              <v-btn color="primary" class="text-none my-2" large v-on="on">
+              <v-btn color="primary" class="text-none my-2" large v-on="on" @click="$ga.event('button', 'click', 'map')">
                 <v-img src="@/assets/images/icon_map.png" class="mr-2" />
                 <span class="mt-1">Mapa</span>
               </v-btn>
@@ -135,7 +135,7 @@
             <v-btn
               color="primary"
               class="text-none mt-6"
-              @click.stop="showForm = true"
+              @click.stop="$ga.event('button', 'click', 'contact-top'); showForm = true"
               >Contatar anunciante</v-btn
             >
           </v-sheet>
@@ -213,7 +213,7 @@
         <v-btn
           color="primary"
           class="text-none mt-6"
-          @click.stop="showForm = true"
+          @click.stop="$ga.event('button', 'click', 'contact-bottom'); showForm = true"
           >Contatar anunciante</v-btn
         >
       </v-container>
@@ -340,7 +340,12 @@ export default {
           value: p => p.parkingSpaces,
           tooltip: 'Vagas'
         }
-      ]
+      ],
+      routeIcons: {
+        car: require('@/assets/images/icon_car.png'),
+        bus: require('@/assets/images/icon_bus.png'),
+        pedestrian: require('@/assets/images/icon_foot.png')
+      }
     }
   },
   created() {
@@ -351,8 +356,17 @@ export default {
           (this.similarProperties = res.data.map(p => this.getRandomPics(p)))
       )
   },
+  mounted(){
+    window.scrollTo(0,0);
+  },
   methods: {
     sendMessage() {
+      this.$ga.event('button', 'click', 'send-message', {
+        'dimension5': this.leadMessage.name,
+        'dimension6': this.leadMessage.email,
+        'dimension7': this.leadMessage.phone,
+        'dimension8': this.leadMessage.message
+      })
       this.message = ''
       this.loading = true
       nudoor.sendMessage(this.leadMessage).then(res => {

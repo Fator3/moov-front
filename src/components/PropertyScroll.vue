@@ -16,13 +16,7 @@
             <v-card
               class="primary--text elevation-2 fill-height"
               color="white"
-              :to="{
-                name: 'property-show',
-                params: {
-                  id: properties[i - 1 + (j - 1)].id,
-                  property: properties[i - 1 + (j - 1)]
-                }
-              }"
+              @click="openProperty(properties[i - 1 + (j - 1)])"
             >
               <v-img :src="properties[i - 1 + (j - 1)].pics[0]" />
               <v-card-subtitle class="pa-3 pb-1 caption white property-type">{{
@@ -106,6 +100,16 @@ export default {
       else {
         return `R$ ${price}<span class="subtitle-2"> / mês</span>`
       }
+    },
+    openProperty(property){
+      this.$ga.event('property', 'click', 'scroll-'+(this.title || 'similar', {'dimension9' : JSON.stringify(property)}))
+      this.$router.push({
+        name: 'details',
+                params: {
+                  id: property.id,
+                  property: property
+                }
+      })
     }
   }
 }

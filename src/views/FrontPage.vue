@@ -56,6 +56,12 @@ export default {
     ...mapActions(['fetchProperties']),
     ...mapGetters(['getProperties']),
     listProperties(searchParams) {
+      this.$ga.event('search', 'search', 'firstPage', {
+        'dimension1': searchParams.city,
+        'dimension2': searchParams.type,
+        'dimension3': searchParams.isRent,
+        'dimension4': JSON.stringify(searchParams.references)
+      })
       this.$router.push({
         name: 'list',
         params: { searchParams: searchParams }

@@ -14,6 +14,7 @@
         :to="link.url"
         active-class="active"
         :depressed="false"
+         @click="$ga.event('link', 'click', link.event)"
       >
         {{ link.label }}
       </v-btn>
@@ -37,10 +38,12 @@ export default {
     return {
       links: [
         {
+          event: 'home-header',
           label: 'Início',
           url: '/'
         },
         {
+          event: 'about-header',
           label: 'Quem somos?',
           url: '/about'
         }
