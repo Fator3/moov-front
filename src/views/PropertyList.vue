@@ -129,22 +129,13 @@ export default {
       this.disable = false
       this.currentIndex = 0
       this.searchParams = searchParams
-      if (
-        !this.searchParams ||
-        !this.searchParams.references[0] ||
-        this.searchParams.references[0].address == ''
-      ) {
-        this.properties = (await PropertyService.getAllProperties()).map(p =>
-          this.getRandomPics(p)
-        )
-      } else {
-        PropertyService.getFilteredProperties(this.searchParams).then(
-          response => {
-            this.properties = response.data.map(p => this.getRandomPics(p))
-            this.loadDistances()
-          }
-        )
-      }
+     
+      PropertyService.getFilteredProperties(this.searchParams).then(
+        response => {
+          this.properties = response.data.map(p => this.getRandomPics(p))
+          this.loadDistances()
+        }
+      )
     },
     getRandomPics(property) {
       let p = []

@@ -203,16 +203,17 @@ export default {
         isRent: null,
         type: null,
         city: null,
-        references: []
+        references: this.references
       }
     },
     searchProperties() {
       this.$ga.event('button', 'click', 'search')
-      this.searchParams.references = this.references
+      this.searchParams.isRent = this.searchParams.isRent == null ? true : this.searchParams.isRent
+      this.references = this.references
         .filter(
           r =>
             r.address != null &&
-            r.address.length > 0 &&
+            r.address.trim().length > 0 &&
             !isNaN(parseInt(r.time))
         )
         .map(r => ({
@@ -221,13 +222,31 @@ export default {
           transport: r.transport == null ? 'car' : r.transport,
           routeTime: 0
         }))
+      this.searchParams.references = [...this.references]
       this.$emit('search', this.searchParams)
+
+      if(this.references.length == 0){
+          this.references.push({
+          address: '',
+          time: '',
+          transport: '',
+          routeTime: 0
+        })
+      }
     }
   },
   created() {
     if (this.searchInput) {
       this.searchParams = this.searchInput
       this.references = this.searchParams.references
+      if(this.references.length == 0){
+          this.references.push({
+          address: '',
+          time: '',
+          transport: '',
+          routeTime: 0
+        })
+      }
     }
   }
 }
