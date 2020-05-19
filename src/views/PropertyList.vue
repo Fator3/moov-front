@@ -1,7 +1,11 @@
 <template>
   <v-container class="ma-0 pa-0 wrapper" fluid>
     <v-sheet id="search" class="py-8">
-      <SearchForm :searchInput="searchParams" v-on:search="loadNewProperties" />
+      <SearchForm
+        :searchInput="searchParams"
+        :origin="'listPage'"
+        v-on:search="loadNewProperties"
+      />
     </v-sheet>
     <v-container fluid class="search-result pt-8">
       <span class="total">{{
@@ -114,13 +118,7 @@ export default {
       }
       this.isLoading = false
     },
-    loadNewProperties(searchParams){
-      this.$ga.event('search', 'search', 'listPage', {
-        'dimension1': searchParams.city,
-        'dimension2': searchParams.type,
-        'dimension3': searchParams.isRent,
-        'dimension4': JSON.stringify(searchParams.references)
-      })
+    loadNewProperties(searchParams) {
       this.loadProperties(searchParams)
     },
     async loadProperties(searchParams) {
@@ -129,7 +127,6 @@ export default {
       this.disable = false
       this.currentIndex = 0
       this.searchParams = searchParams
-     
       PropertyService.getFilteredProperties(this.searchParams).then(
         response => {
           this.properties = response.data.map(p => this.getRandomPics(p))
