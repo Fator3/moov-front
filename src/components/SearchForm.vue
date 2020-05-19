@@ -108,7 +108,7 @@
 import nudoor from '@/services/PropertyService'
 export default {
   name: 'SearchForm',
-  props: ['searchInput'],
+  props: ['searchInput', 'origin'],
   data() {
     return {
       descriptionLimit: 60,
@@ -208,7 +208,15 @@ export default {
     },
     searchProperties() {
       this.$ga.event('button', 'click', 'search')
-      this.searchParams.isRent = this.searchParams.isRent == null ? true : this.searchParams.isRent
+      this.$ga.event('search', 'search', this.origin, {
+        dimension1: this.searchParams.city,
+        dimension2: this.searchParams.type,
+        dimension3: this.searchParams.isRent,
+        dimension4: JSON.stringify(this.references)
+      })
+      this.searchParams.isRent =
+        this.searchParams.isRent == null ? true : this.searchParams.isRent
+
       this.references = this.references
         .filter(
           r =>
@@ -222,11 +230,12 @@ export default {
           transport: r.transport == null ? 'car' : r.transport,
           routeTime: 0
         }))
-      this.searchParams.references = [...this.references]
-      this.$emit('search', this.searchParams)
 
-      if(this.references.length == 0){
-          this.references.push({
+      this.searchParams.references = [...this.references]
+      this.$emit('search', { ...this.searchParams })
+
+      if (this.references.length === 0) {
+        this.references.push({
           address: '',
           time: '',
           transport: '',
@@ -237,10 +246,10 @@ export default {
   },
   created() {
     if (this.searchInput) {
-      this.searchParams = this.searchInput
-      this.references = this.searchParams.references
-      if(this.references.length == 0){
-          this.references.push({
+      this.searchParams = { ...this.searchInput }
+      this.references = [...this.searchParams.references]
+      if (this.references.length === 0) {
+        this.references.push({
           address: '',
           time: '',
           transport: '',
