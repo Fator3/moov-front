@@ -6,7 +6,7 @@
         <span class="white--text">O tempo é agora. </span
         ><span class="secondary--text">Qual<br />vida você quer viver?</span>
       </v-sheet>
-      <SearchForm v-on:search="listProperties" />
+      <SearchForm v-on:search="listProperties" :origin="'firstPage'" />
     </v-sheet>
     </v-row>
     <ConceptVideo />
@@ -63,12 +63,6 @@ export default {
     ...mapActions(['fetchProperties']),
     ...mapGetters(['getProperties']),
     listProperties(searchParams) {
-      this.$ga.event('search', 'search', 'firstPage', {
-        'dimension1': searchParams.city,
-        'dimension2': searchParams.type,
-        'dimension3': searchParams.isRent,
-        'dimension4': JSON.stringify(searchParams.references)
-      })
       this.$router.push({
         name: 'list',
         params: { searchParams: searchParams }
