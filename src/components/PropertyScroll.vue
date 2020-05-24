@@ -1,18 +1,19 @@
 <template>
-  <v-container class="wrapper">
+  <v-container class="wrapper" 
+   >
     <v-container class="d-flex align-center px-8" fluid v-if="title">
       <v-divider color="#D8D8D8" />
       <span class="primary--text scroll-title mx-4">{{ title }}</span>
       <v-divider color="#D8D8D8" />
     </v-container>
     <v-carousel hide-delimiters height="auto">
-      <v-carousel-item
-        :key="i"
-        v-for="i in properties.length / 3"
-        class="mx-8 my-0"
-      >
-        <v-row class="mx-4 align-center fill-height">
-          <v-col :key="j" v-for="j in 3" cols="4" class="fill-height">
+        <v-carousel-item
+          :key="i"
+          v-for="i in properties.length / smallDisplay()"
+          class="mx-8 my-0"
+        >
+        <v-row class="align-center fill-height">
+            <v-col :key="j" v-for="j in smallDisplay()" xs="12" sm="12" md="4" class="fill-height">
             <v-card
               class="primary--text elevation-2 fill-height"
               color="white"
@@ -64,6 +65,7 @@
       </v-carousel-item>
     </v-carousel>
   </v-container>
+
 </template>
 <script>
 export default {
@@ -91,7 +93,9 @@ export default {
           value: p => p.parkingSpaces,
           tooltip: 'Vagas'
         }
-      ]
+      ],
+      propertySize: 3,
+      // smallDisplay: false
     }
   },
   methods: {
@@ -105,11 +109,18 @@ export default {
       this.$ga.event('property', 'click', 'scroll-'+(this.title || 'similar', {'dimension9' : JSON.stringify(property)}))
       this.$router.push({
         name: 'details',
-                params: {
-                  id: property.id,
-                  property: property
-                }
+        params: {
+          id: property.id,
+          property: property
+        }
       })
+    },
+    smallDisplay() {
+      if (this.$vuetify.breakpoint.smAndDown) {
+        return 1
+      } else {
+        return 3
+      }
     }
   }
 }
@@ -152,4 +163,5 @@ export default {
 
   color: #949494;
 }
+
 </style>

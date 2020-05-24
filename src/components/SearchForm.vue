@@ -1,7 +1,7 @@
 <template>
   <v-sheet id="search-form">
-    <v-row>
-      <v-col
+    <v-row class="d-flex align-center">
+      <v-col class="d-flex flex-column md4 sm6 pb-0"
         ><label>O que você precisa?</label
         ><v-select
           solo
@@ -13,8 +13,8 @@
           v-model="searchParams.isRent"
         ></v-select
       ></v-col>
-      <v-col
-        ><label>Qual tipo?</label
+      <v-col class="d-flex flex-column md4 sm6 pb-0"
+        ><label >Qual tipo?</label
         ><v-select
           solo
           :items="['Apartamento', 'Casa', 'Comercial']"
@@ -22,8 +22,8 @@
           v-model="searchParams.type"
         ></v-select
       ></v-col>
-      <v-col
-        ><label>Onde procura seu imóvel?</label
+      <v-col class="d-flex flex-column md4 sm6 pb-0"
+        ><label >Qual o lugar?</label
         ><v-autocomplete
           solo
           v-model="searchParams.city"
@@ -42,9 +42,9 @@
     <v-row
       v-for="(reference, index) in references"
       :key="'ref' + index"
-      class="reference-row"
+      class="d-flex reference-row align-center"
     >
-      <v-col class="pb-0"
+      <v-col class="d-flex flex-column md4 sm6 pb-5"
         ><label v-if="index == 0">Ponto de referência</label
         ><v-text-field
           solo
@@ -60,7 +60,7 @@
           >
         </v-text-field></v-col
       >
-      <v-col class="pb-0"
+      <v-col class="d-flex flex-column md4 sm6  pb-5"
         ><label v-if="index == 0">Tempo em minutos</label
         ><v-text-field
           solo
@@ -68,7 +68,7 @@
           v-model="reference.time"
         ></v-text-field
       ></v-col>
-      <v-col class="pb-0"
+      <v-col class="d-flex flex-column md4 sm6 pb-5"
         ><label v-if="index == 0">Meio de transporte</label
         ><v-select
           solo
@@ -262,6 +262,15 @@ export default {
 }
 .search-buttons button {
   border-radius: 7px;
+}
+label {
+  display: block;
+  position: relative;
+}
+@media screen and (max-width: 600px) {
+  .row {
+    flex-direction: column;
+  }
 }
 </style>
 <style>

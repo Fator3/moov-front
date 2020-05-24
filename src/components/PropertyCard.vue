@@ -1,11 +1,11 @@
 <template>
     <v-sheet @click="openProperty()" class="primary--text elevation-2 my-8" color="white" style="cursor:pointer">
-      <v-row dense no-gutters class="">
-        <v-col cols="4" dense class="">
+      <v-row dense no-gutters class="d-flex flex-row align-center">
+        <v-col dense class="d-flex flex-column" xs="12" sm="12" md="4">
           <v-img :src="property.pics[0]" cover height="100%" />
         </v-col>
 
-        <v-col class="pa-4">
+        <v-col class="d-flex flex-column pa-4">
           <span class="pa-3 pb-1 white property-type">{{ property.type }}</span>
           <v-sheet
             class="property-details text--primary px-3 d-flex flex-column"
@@ -33,7 +33,7 @@
                 :key="'icon' + index"
                 v-for="(info, index) in infos"
                 color="white"
-                class="d-flex mr-4 align-center"
+                class="d-flex flex-column mr-4 align-center"
               >
                 <v-img
                   :title="info.tooltip"

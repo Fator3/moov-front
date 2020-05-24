@@ -1,25 +1,26 @@
 <template>
-  <v-row class="d-flex pa-8 wrapper">
+  <v-row class="d-flex flex-row pa-8 ">
     <v-col
-      class="pa-12 d-flex flex-column align-center justify-center flex-grow-1 text-justify"
+      class="d-flex flex-column align-center pa-12"
     >
+    <div style="padding-top:25%;">
       <v-img
         height="42"
         src="@/assets/images/logo.png"
         contain
-        class="flex-grow-0 mb-4 flex-shrink-1"
+        class="flex-grow-0 mb-6 flex-shrink-1 "
       />
-      <span class="primary--text  font-weight-medium video-text"
+      <span class="primary--text font-weight-medium video-text justify-center flex-grow-1 text-justify "
         >Estamos aqui pra ajudar<br />em suas escolhas.</span
       >
+    </div>
     </v-col>
 
-    <v-col cols="7">
+    <v-col class="d-flex flex-column align-content-center">
       <v-img
         height="400"
         src="@/assets/images/concept_image.png"
         contain
-        class="flex-grow-0"
       />
     </v-col>
   </v-row>
@@ -31,5 +32,8 @@
 }
 .wrapper {
   background-color: white;
+}
+.content-align {
+  padding-top: 10%;
 }
 </style>

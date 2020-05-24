@@ -10,8 +10,8 @@
       </v-slide-item>
     </v-slide-group>
     <v-sheet class="content">
-      <v-row>
-        <v-col class="d-flex flex-column align-start mr-12">
+      <v-row class="d-flex align-center">
+        <v-col class="d-flex flex-column align-start" xs="12" sm="12" md="9">
           <span class="breadcrumb mb-4">
             {{
               `Início > ${property.city} > ${property.district} > ${property.agencyReference}`
@@ -91,31 +91,31 @@
             comodidade e fica situado em ótima localização.
           </p>
         </v-col>
-        <v-col cols="4" class="ml-12">
-          <v-sheet class="contact pa-4 d-flex flex-column align-center">
+        <v-col class="align-center" xs="12" sm="12" md="3">
+          <v-sheet class="contact d-flex flex-column align-center">
             <v-img src="@/assets/images/logo.png" height="30" contain />
             <span class="primary--text mt-2 mb-8">(11) 98787-0203</span>
-            <v-row justify="space-between" class="tax-info" dense no-gutters
-              ><v-col>Venda</v-col
-              ><v-col class="text-right">{{
+            <v-row justify="space-between" class="tax-info" dense 
+              ><v-col class="d-flex flex-column">Venda</v-col
+              ><v-col class="d-flex flex-column text-right">{{
                 formatMoney(property.sellPrice)
               }}</v-col></v-row
             >
-            <v-row justify="space-between" class="tax-info" dense no-gutters
-              ><v-col>Aluguel</v-col
-              ><v-col class="text-right">{{
+            <v-row justify="space-between" class="tax-info" dense 
+              ><v-col class="d-flex flex-column">Aluguel</v-col
+              ><v-col class="d-flex flex-column text-right">{{
                 formatMoney(property.rentalPrice)
               }}</v-col></v-row
             >
-            <v-row justify="space-between" class="tax-info" dense no-gutters
-              ><v-col>Condomínio</v-col
-              ><v-col class="text-right">{{
+            <v-row justify="space-between" class="tax-info" dense 
+              ><v-col class="d-flex flex-column">Condomínio</v-col
+              ><v-col class="d-flex flex-column text-right">{{
                 formatMoney(property.complexFee)
               }}</v-col></v-row
             >
-            <v-row justify="space-between" class="tax-info" dense no-gutters
-              ><v-col>IPTU</v-col
-              ><v-col class="text-right">{{
+            <v-row justify="space-between" class="tax-info" dense 
+              ><v-col class="d-flex flex-column">IPTU</v-col
+              ><v-col class="d-flex flex-column text-right">{{
                 formatMoney(property.propertyTax)
               }}</v-col></v-row
             >
@@ -126,9 +126,9 @@
               dense
               no-gutters
               align="center"
-              ><v-col>Total</v-col
+              ><v-col class="d-flex flex-column">Total</v-col
               ><v-col
-                class="text-right price"
+                class="d-flex flex-column text-right sm-text price"
                 v-html="formatPrice(property)"
               ></v-col
             ></v-row>
@@ -202,10 +202,14 @@
         </v-row>
       </v-container>
       <v-divider width="100%" color="#D8D8D8" />
-      <v-container class="pt-6" fluid>
-        <span class="section-title">Imóveis similares</span>
-        <PropertyScroll :properties="similarProperties" class="my-2" />
-      </v-container>
+      <v-row class="d-flex align-center">
+          <v-col class="d-flex flex-column align-center">
+            <span class="section-title">Imóveis similares</span>
+          </v-col>
+          <v-col class="d-flex flex-column align-center">
+            <PropertyScroll :properties="similarProperties" clas="my-2" />
+          </v-col>
+      </v-row> 
       <v-container class="d-flex flex-column align-center my-12" fluid>
         <span class="bottom-text"
           >Você ficou com alguma dúvida sobre esse anúncio?</span
@@ -569,6 +573,11 @@ export default {
   max-width: 1200px;
   width: 100%;
 }
+@media screen and (max-width: 600px) {
+  .sm-text {
+    font-size: 24px;
+  }
+}
 </style>
 <style>
 .v-slide-group__prev,
@@ -592,4 +601,5 @@ export default {
 .v-dialog {
   max-width: 1200px !important;
 }
+
 </style>
