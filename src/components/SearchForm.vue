@@ -1,6 +1,6 @@
 <template>
   <v-sheet id="search-form" class="form-align">
-    <v-row class="d-flex align-center">
+    <v-row class="d-flex mx-0 ">
       <v-col class="d-flex flex-column md4 sm6 lg4 pb-0"
         ><label>O que você precisa?</label
         ><v-select
@@ -23,7 +23,7 @@
         ></v-select
       ></v-col>
       <v-col class="d-flex flex-column md4 sm6 pb-0"
-        ><label >Qual o lugar?</label
+        ><label >Onde procura seu imóvel?</label
         ><v-autocomplete
           solo
           v-model="searchParams.city"
@@ -42,7 +42,7 @@
     <v-row
       v-for="(reference, index) in references"
       :key="'ref' + index"
-      class="d-flex reference-row align-center"
+      class="d-flex reference-row mx-0"
     >
       <v-col class="d-flex flex-column md4 sm6 pb-5"
         ><label v-if="index == 0">Ponto de referência</label
@@ -82,14 +82,17 @@
         ></v-select
       ></v-col>
     </v-row>
-    <v-row>
+    <v-row class="d-flex mx-0">
       <v-col></v-col>
       <v-col></v-col>
-      <v-col class="d-flex justify-space-between search-buttons">
+      <v-col 
+        class="d-flex justify-space-between search-buttons"
+        :class="{ 'flex-column' : $vuetify.breakpoint.xs }">
         <v-btn
           color="white"
           large
-          class="text-none flex-grow-1 mr-3"
+          class="text-none flex-grow-1"
+          :class="{ 'mr-3' : $vuetify.breakpoint.smAndUp }"
           @click="clean()"
           >Limpar</v-btn
         >
@@ -97,6 +100,7 @@
           color="primary"
           large
           class="text-none flex-grow-1"
+          :class="{ 'mt-3' : $vuetify.breakpoint.xs }"
           @click="searchProperties()"
           >Buscar</v-btn
         >
@@ -276,9 +280,7 @@ label {
   display: block;
   position: relative;
 }
-.form-align {
-  padding-left: 10px;
-}
+
 @media screen and (max-width: 600px) {
   .row {
     flex-direction: column;

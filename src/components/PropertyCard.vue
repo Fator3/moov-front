@@ -1,11 +1,11 @@
 <template>
     <v-sheet @click="openProperty()" class="primary--text elevation-2 my-8" color="white" style="cursor:pointer">
-      <v-row dense no-gutters class="d-flex flex-row align-center">
+      <v-row dense no-gutters class="d-flex flex-row">
         <v-col dense class="d-flex flex-column" xs="12" sm="12" md="4" lg="4">
           <v-img :src="property.pics[0]" cover height="100%" />
         </v-col>
 
-        <v-col class="d-flex flex-column pa-4">
+        <v-col class="d-flex flex-column pa-4 align-start">
           <span class="pa-3 pb-1 white property-type">{{ property.type }}</span>
           <v-sheet
             class="property-details text--primary px-3 d-flex flex-column"
@@ -28,29 +28,31 @@
             
               <v-sheet
                 class="d-flex justify-start font-weight-medium"
-                color="white"
-              >
-              <v-row class="d-flex flex-row align-center">
-                  <v-sheet
-                    :key="'icon' + index"
-                    v-for="(info, index) in infos"
-                    color="white"
-                    class="d-flex mx-3 py-1 align-center"
-                  >
-                    <v-img
-                      :title="info.tooltip"
-                      :src="info.icon"
-                      class="flex-grow-0"
-                    />
-                    <span class="info-value ml-1">{{ info.value(property) }}</span>
-                  </v-sheet>
-              </v-row>
-
+                color="white">
+                <v-row class="d-flex flex-row align-center">
+                    <v-sheet
+                      :key="'icon' + index"
+                      v-for="(info, index) in infos"
+                      color="white"
+                      class="d-flex mx-3 py-1 align-center"
+                    >
+                      <v-img
+                        :title="info.tooltip"
+                        :src="info.icon"
+                        class="flex-grow-0"
+                      />
+                      <span class="info-value ml-1">{{ info.value(property) }}</span>
+                    </v-sheet>
+                </v-row>
               </v-sheet>
-            <v-sheet class="d-flex mt-5">
+            <v-sheet class="d-flex mt-5 "
+              :class="{ 'flex-column' : $vuetify.breakpoint.xs}"
+              
+              >
               <v-sheet
                 v-for="(reference, index) in property.references"
-                class="time-chip d-flex flex-column text-center py-1 px-5 mr-4 primary--text"
+                class="time-chip d-flex flex-column text-center py-1 px-5 primary--text"
+                :class=" $vuetify.breakpoint.xs ? 'mb-4' : 'mr-4' "
                 :key="'ref' + index"
               >
                 <v-sheet
@@ -213,4 +215,12 @@ export default {
 
   color: #949494;
 }
+.text-arrange {
+  margin-left:  0px; 
+  margin-right: 0px; 
+  padding-left: 0px; 
+  padding-right:0px;
+  
+}
+
 </style>

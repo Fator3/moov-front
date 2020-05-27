@@ -8,7 +8,7 @@
         />
         <span> (11) 98787-0203</span> 
         <span>contato@nudoor.com.br </span>
-        <v-sheet color="transparent">
+        <v-sheet color="transparent" class="mt-4">
           <span class="primary--text">O tempo é agora. <br /></span
           ><span class="secondary--text"
             >Qual vida você quer viver?</span

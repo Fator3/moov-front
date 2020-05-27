@@ -16,40 +16,33 @@
             para viver!
           </span>
         </v-col>
-        <v-col class="d-flex flex-column align-center" style="padding-bottom:50px;" xs="12" sm="12" md="6" lg="6">
-          <div class="img-container">
-            <img src="../assets/images/about-girl.png" class="img-align-left" />
-            <div class="rect-after"></div>
-          </div>
+        <v-col class="d-flex flex-column align-center mb-10" xs="12" sm="12" md="6" lg="6">
+            <v-img src="../assets/images/about-girl.png" class=""/>
         </v-col>
       </v-row>
       <v-divider></v-divider>
-      <v-row class="d-flex align-center">
-        <v-col class="d-flex flex-column justify-center mb-3" xs="6" sm="6" md="3" lg="3">
-          <img class="img-icon-size" src="../assets/images/icon-confort.png" style="width: 72.76px" />
+      <v-row class="d-flex align-center" no-gutters="">
+        <v-col class="d-flex flex-column justify-center " xs="12" sm="6" md="3" lg="3">
+          <v-img class="img-icon-size" src="../assets/images/icon-confort.png" style="width: 72.76px" />
           <span class="text-icon">Conforto</span>
         </v-col>
-        <v-col class="d-flex flex-column justify-center mb-3" xs="6" sm="6" md="3" lg="3">
-          <img class="img-icon-size" src="../assets/images/icon-safety.png" />
+        <v-col class="d-flex flex-column justify-center " xs="12" sm="6" md="3" lg="3">
+          <v-img class="img-icon-size" src="../assets/images/icon-safety.png" />
           <span class="text-icon">Segurança</span>
         </v-col>
-        <v-col class="d-flex flex-column justify-center mb-3" xs="6" sm="6" md="3" lg="3">
-          <img class="img-icon-size" src="../assets/images/icon-key.png" />
+        <v-col class="d-flex flex-column justify-center " xs="12" sm="6" md="3" lg="3">
+          <v-img class="img-icon-size" src="../assets/images/icon-key.png" />
           <span class="text-icon">Facilidade</span>
         </v-col>
-        <v-col class="d-flex flex-column justify-center mb-3" xs="6" sm="6" md="3" lg="3">
-          <img src="../assets/images/icon-home.png" class="img-icon-size" />
+        <v-col class="d-flex flex-column justify-center " xs="12" sm="6" md="3" lg="3">
+          <v-img src="../assets/images/icon-home.png" class="img-icon-size" />
           <span class="text-icon">Novo lar</span>
         </v-col>
       </v-row>
       <v-divider></v-divider>
       <v-row  class="d-flex align-center">
-        <v-col class="d-flex flex-column align-start" xs="12" sm="12" md="6" lg="6">
-          <div class="rect-before">
-            <div class="img-container-over ">
-              <img src="../assets/images/couple.png" />
-            </div>
-          </div>
+        <v-col class="d-flex flex-column align-center mt-12 " xs="12" sm="12" md="6" lg="6">
+            <v-img src="../assets/images/couple.png" class=""/>
         </v-col>
         <v-col class="d-flex flex-column align-center" xs="12" sm="12" md="6" lg="6">
           <span class="text-style-secondary pa-left pa-bottom" >
@@ -166,7 +159,8 @@ export default {}
 }
 .img-container {
   left: 8%;
-  width: 380px;
+  width: 100%;
+  max-width: 380px;
   height: 430px;
   background-color: #7F56C3;
   position: relative;
@@ -175,11 +169,12 @@ export default {}
 }
 .rect-after {
   position: absolute;
-  width: 380px;
+  width: 100%;
   height: 430px;
   border: 2px solid #34B6F2;
   top: 20px;
   right: 20px;
+
 }
 .rect-before {
   position: relative;
@@ -256,6 +251,11 @@ export default {}
 }
 .img-founder-align {
   margin-left: 15%;
+}
+
+.couple-center {
+  margin-top: auto;
+  margin-bottom: auto;
 }
 @media screen and (max-width: 600px) {
   .pa-right {

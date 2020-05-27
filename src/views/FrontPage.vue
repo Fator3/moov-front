@@ -1,6 +1,6 @@
 <template>
   <v-container class="ma-0 pa-0 wrapper" fluid>
-    <v-row class="d-flex flex-row align-center">
+    <v-row class="">
     <v-sheet id="search">
       <v-sheet id="headline" class="display-2">
         <span class="white--text">O tempo é agora. </span
