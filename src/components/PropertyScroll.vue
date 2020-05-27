@@ -1,5 +1,5 @@
 <template>
-  <v-container class="wrapper" 
+  <v-container class="wrapper " 
    >
     <v-container class="d-flex align-center px-8" fluid v-if="title">
       <v-divider color="#D8D8D8" />
@@ -12,8 +12,8 @@
           v-for="i in properties.length / smallDisplay()"
           class="mx-8 my-0"
         >
-        <v-row class="align-center fill-height">
-            <v-col :key="j" v-for="j in smallDisplay()" xs="12" sm="12" md="4" class="fill-height">
+        <v-row class="mx-4 align-center fill-height spacing">
+            <v-col :key="j" v-for="j in smallDisplay()" xs="12" sm="12" md="4" lg="4" class="fill-height">
             <v-card
               class="primary--text elevation-2 fill-height"
               color="white"
@@ -163,5 +163,10 @@ export default {
 
   color: #949494;
 }
-
+@media screen and (max-width: 600px) {
+  .spacing {
+    margin: 0px 0px;
+    padding: 0px 0px;
+  }
+}
 </style>

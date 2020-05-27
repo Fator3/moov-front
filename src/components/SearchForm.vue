@@ -1,7 +1,7 @@
 <template>
-  <v-sheet id="search-form">
+  <v-sheet id="search-form" class="form-align">
     <v-row class="d-flex align-center">
-      <v-col class="d-flex flex-column md4 sm6 pb-0"
+      <v-col class="d-flex flex-column md4 sm6 lg4 pb-0"
         ><label>O que você precisa?</label
         ><v-select
           solo
@@ -275,6 +275,9 @@ export default {
 label {
   display: block;
   position: relative;
+}
+.form-align {
+  padding-left: 10px;
 }
 @media screen and (max-width: 600px) {
   .row {

@@ -6,6 +6,8 @@
           src="@/assets/images/logo.png"
           class="flex-grow-0 mb-8 flex-shrink-1 pa-0 mx-0"
         />
+        <span> (11) 98787-0203</span> 
+        <span>contato@nudoor.com.br </span>
         <v-sheet color="transparent">
           <span class="primary--text">O tempo é agora. <br /></span
           ><span class="secondary--text"
@@ -19,14 +21,12 @@
           <v-img src="@/assets/images/icon_linkedin.png" />
         </v-sheet>
       </v-col>
-      <v-col class="d-flex flex-column align-center mb-4">
-        <span> (11) 98787-0203</span> 
-        <span>contato@nudoor.com.br </span>
-      </v-col>
-      <v-col class="links d-flex flex-column align-center mb-4">
-        <v-btn light text to="/" class="text-none" @click="$ga.event('link', 'click', 'home-footer')"
->Início</v-btn>
-        <v-btn text to="/about" class="text-none" @click="$ga.event('link', 'click', 'about-footer')">Quem somos?</v-btn>
+      
+      <v-col class="links d-flex flex-column align-center">
+        <div class="d-flex flex-column align-start pr-12">
+          <v-btn light text to="/" class="text-none" @click="$ga.event('link', 'click', 'home-footer')">Início</v-btn>
+          <v-btn text to="/about" class="text-none" @click="$ga.event('link', 'click', 'about-footer')">Quem somos?</v-btn>
+        </div>
       </v-col>
     </v-row>
   </v-container>

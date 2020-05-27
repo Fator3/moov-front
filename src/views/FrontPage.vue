@@ -26,11 +26,11 @@
       class="my-2"
     />
     <v-sheet class="d-flex justify-space-between primary--text bottom" fluid>
-      <v-row class="d-flex flex-row align-center sm-stack">
-        <v-col class="d-flex flex-column align-center justify-space-between primary--text center">
+      <v-row class="d-flex flex-row align-center sm-stack" no-gutters>
+        <v-col class="d-flex flex-column align-start justify-space-between primary--text " xs="12" sm="12" md="6" lg="6">
           <span class="bottom-text">Estamos aqui pra ajudar em suas escolhas</span>
         </v-col>
-        <v-col class="d-flex flex-column align-center justify-space-between primary--text center">
+        <v-col class="d-flex flex-column align-end justify-space-between primary--text " xs="12" sm="12" md="6" lg="6">
           <span><b>Anuncie com a NuDoor:</b> anuncie@nudoor.com.br</span>
         </v-col>
     </v-row>      
@@ -152,11 +152,12 @@ export default {
 .bottom {
   width: 100%;
   max-width: 100% !important;
-  padding: 40px 80px;
+  padding: 30px 80px;
 }
 @media screen and (max-width: 600px) {
   .sm-stack {
     flex-direction: column;
   }
 }
+
 </style>

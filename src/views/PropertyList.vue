@@ -1,5 +1,6 @@
 <template>
   <v-container class="ma-0 pa-0 wrapper" fluid>
+    <v-row class="d-flex flex-row align-center">
     <v-sheet id="search" class="py-8">
       <SearchForm
         :searchInput="searchParams"
@@ -7,6 +8,7 @@
         v-on:search="loadNewProperties"
       />
     </v-sheet>
+    </v-row>
     <v-container fluid class="search-result pt-8">
       <span class="total">{{
         `${this.properties.length} imóveis para ${

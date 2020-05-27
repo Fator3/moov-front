@@ -1,7 +1,7 @@
 <template>
     <v-sheet @click="openProperty()" class="primary--text elevation-2 my-8" color="white" style="cursor:pointer">
       <v-row dense no-gutters class="d-flex flex-row align-center">
-        <v-col dense class="d-flex flex-column" xs="12" sm="12" md="4">
+        <v-col dense class="d-flex flex-column" xs="12" sm="12" md="4" lg="4">
           <v-img :src="property.pics[0]" cover height="100%" />
         </v-col>
 
@@ -25,24 +25,28 @@
             <span class="property-address mt-1 mb-4">{{
               property.district + ', ' + property.city
             }}</span>
-            <v-sheet
-              class="d-flex justify-start font-weight-medium"
-              color="white"
-            >
+            
               <v-sheet
-                :key="'icon' + index"
-                v-for="(info, index) in infos"
+                class="d-flex justify-start font-weight-medium"
                 color="white"
-                class="d-flex flex-column mr-4 align-center"
               >
-                <v-img
-                  :title="info.tooltip"
-                  :src="info.icon"
-                  class="flex-grow-0"
-                />
-                <span class="info-value ml-1">{{ info.value(property) }}</span>
+              <v-row class="d-flex flex-row align-center">
+                  <v-sheet
+                    :key="'icon' + index"
+                    v-for="(info, index) in infos"
+                    color="white"
+                    class="d-flex mx-3 py-1 align-center"
+                  >
+                    <v-img
+                      :title="info.tooltip"
+                      :src="info.icon"
+                      class="flex-grow-0"
+                    />
+                    <span class="info-value ml-1">{{ info.value(property) }}</span>
+                  </v-sheet>
+              </v-row>
+
               </v-sheet>
-            </v-sheet>
             <v-sheet class="d-flex mt-5">
               <v-sheet
                 v-for="(reference, index) in property.references"

@@ -91,8 +91,8 @@
             comodidade e fica situado em ótima localização.
           </p>
         </v-col>
-        <v-col class="align-center" xs="12" sm="12" md="3">
-          <v-sheet class="contact d-flex flex-column align-center">
+        <v-col class="align-center" xs="12" sm="12" md="3" lg="3" >
+          <v-sheet class="contact d-flex flex-column align-center box-sizing" >
             <v-img src="@/assets/images/logo.png" height="30" contain />
             <span class="primary--text mt-2 mb-8">(11) 98787-0203</span>
             <v-row justify="space-between" class="tax-info" dense 
@@ -135,6 +135,7 @@
             <v-btn
               color="primary"
               class="text-none mt-6"
+              
               @click.stop="$ga.event('button', 'click', 'contact-top'); showForm = true"
               >Contatar anunciante</v-btn
             >
@@ -201,15 +202,12 @@
           </v-col>
         </v-row>
       </v-container>
-      <v-divider width="100%" color="#D8D8D8" />
-      <v-row class="d-flex align-center">
-          <v-col class="d-flex flex-column align-center">
-            <span class="section-title">Imóveis similares</span>
-          </v-col>
-          <v-col class="d-flex flex-column align-center">
-            <PropertyScroll :properties="similarProperties" clas="my-2" />
-          </v-col>
-      </v-row> 
+      <v-divider width="100%" color="#D8D8D8"></v-divider>
+      <div class="py-6 px-4"><span class="section-title" >Imóveis similares</span></div>
+    </v-sheet>
+    
+    <PropertyScroll :properties="similarProperties" clas="my-2" />
+    <v-sheet>
       <v-container class="d-flex flex-column align-center my-12" fluid>
         <span class="bottom-text"
           >Você ficou com alguma dúvida sobre esse anúncio?</span
@@ -572,6 +570,9 @@ export default {
   height: 600px;
   max-width: 1200px;
   width: 100%;
+}
+.box-sizing {
+  padding: 12px 12px;
 }
 @media screen and (max-width: 600px) {
   .sm-text {
