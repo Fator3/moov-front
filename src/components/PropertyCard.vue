@@ -1,80 +1,84 @@
 <template>
-    <v-sheet @click="openProperty()" class="primary--text elevation-2 my-8" color="white" style="cursor:pointer">
-      <v-row dense no-gutters class="d-flex flex-row">
-        <v-col dense class="d-flex flex-column" xs="12" sm="12" md="4" lg="4">
-          <v-img :src="property.pics[0]" cover height="100%" />
-        </v-col>
+  <v-sheet
+    @click="openProperty()"
+    class="primary--text elevation-2 my-8"
+    color="white"
+    style="cursor:pointer"
+  >
+    <v-row dense no-gutters class="d-flex flex-row">
+      <v-col dense class="d-flex flex-column" xs="12" sm="12" md="4" lg="4">
+        <v-img :src="property.pics[0]" cover height="100%" />
+      </v-col>
 
-        <v-col class="d-flex flex-column pa-4 align-start">
-          <span class="pa-3 pb-1 white property-type">{{ property.type }}</span>
+      <v-col class="d-flex flex-column pa-4 align-start">
+        <span class="pa-3 pb-1 white property-type">{{ property.type }}</span>
+        <v-sheet class="property-details text--primary px-3 d-flex flex-column">
+          <span
+            class="primary--text property-price mt-2"
+            v-html="formatPrice(property)"
+          ></span>
+          <span class="property-tax mb-2">{{
+            `condomínio ${formatMoney(
+              property.complexFee
+            )} | IPTU ${formatMoney(property.propertyTax)}`
+          }}</span>
+          <span class="property-address mt-2 font-weight-medium">{{
+            property.address
+          }}</span>
+          <span class="property-address mt-1 mb-4">{{
+            property.district + ', ' + property.city
+          }}</span>
+
           <v-sheet
-            class="property-details text--primary px-3 d-flex flex-column"
+            class="d-flex justify-start font-weight-medium"
+            color="white"
           >
-            <span
-              class="primary--text property-price mt-2"
-              v-html="formatPrice(property)"
-            ></span>
-            <span class="property-tax mb-2">{{
-              `condomínio ${formatMoney(
-                property.complexFee
-              )} | IPTU ${formatMoney(property.propertyTax)}`
-            }}</span>
-            <span class="property-address mt-2 font-weight-medium">{{
-              property.address
-            }}</span>
-            <span class="property-address mt-1 mb-4">{{
-              property.district + ', ' + property.city
-            }}</span>
-            
+            <v-row class="d-flex flex-row align-center">
               <v-sheet
-                class="d-flex justify-start font-weight-medium"
-                color="white">
-                <v-row class="d-flex flex-row align-center">
-                    <v-sheet
-                      :key="'icon' + index"
-                      v-for="(info, index) in infos"
-                      color="white"
-                      class="d-flex mx-3 py-1 align-center"
-                    >
-                      <v-img
-                        :title="info.tooltip"
-                        :src="info.icon"
-                        class="flex-grow-0"
-                      />
-                      <span class="info-value ml-1">{{ info.value(property) }}</span>
-                    </v-sheet>
-                </v-row>
+                :key="'icon' + index"
+                v-for="(info, index) in infos"
+                color="white"
+                class="d-flex mx-3 py-1 align-center"
+              >
+                <v-img
+                  :title="info.tooltip"
+                  :src="info.icon"
+                  class="flex-grow-0"
+                />
+                <span class="info-value ml-1">{{ info.value(property) }}</span>
               </v-sheet>
-            <v-sheet class="d-flex mt-5 "
-              :class="{ 'flex-column' : $vuetify.breakpoint.xs}"
-              
-              >
+            </v-row>
+          </v-sheet>
+          <v-sheet
+            class="d-flex mt-5 "
+            :class="{ 'flex-column': $vuetify.breakpoint.xs }"
+          >
+            <v-sheet
+              v-for="(reference, index) in property.references"
+              class="time-chip d-flex flex-column text-center py-1 px-5 primary--text"
+              :class="$vuetify.breakpoint.xs ? 'mb-4' : 'mr-4'"
+              :key="'ref' + index"
+            >
               <v-sheet
-                v-for="(reference, index) in property.references"
-                class="time-chip d-flex flex-column text-center py-1 px-5 primary--text"
-                :class=" $vuetify.breakpoint.xs ? 'mb-4' : 'mr-4' "
-                :key="'ref' + index"
+                class="d-flex primary--text justify-center"
+                style="background:transparent"
               >
-                <v-sheet
-                  class="d-flex primary--text justify-center"
-                  style="background:transparent"
+                <v-img
+                  :src="routeIcons[reference.transport]"
+                  contain
+                  class="flex-grow-0 mr-2"
+                />
+                <span class="font-weight-medium headline">
+                  {{ `${reference.routeTime} min` }}</span
                 >
-                  <v-img
-                    :src="routeIcons[reference.transport]"
-                    contain
-                    class="flex-grow-0 mr-2"
-                  />
-                  <span class="font-weight-medium headline">
-                    {{ `${reference.routeTime} min` }}</span
-                  >
-                </v-sheet>
-                <span class="address">{{ reference.address }}</span>
               </v-sheet>
+              <span class="address">{{ reference.address }}</span>
             </v-sheet>
           </v-sheet>
-        </v-col>
-      </v-row>
-    </v-sheet>
+        </v-sheet>
+      </v-col>
+    </v-row>
+  </v-sheet>
 </template>
 
 <script>
@@ -116,12 +120,13 @@ export default {
     }
   },
   methods: {
-    
-    openProperty(){
-      this.$ga.event('property', 'click', 'list', {'dimension9' : JSON.stringify(this.property)})
+    openProperty() {
+      this.$ga.event('property', 'click', 'list', {
+        dimension9: JSON.stringify(this.property)
+      })
       this.$router.push({
         name: 'details',
-       params: { id: this.property.id, property: this.property }
+        params: { id: this.property.id, property: this.property }
       })
     },
     formatPrice(property) {
@@ -216,11 +221,9 @@ export default {
   color: #949494;
 }
 .text-arrange {
-  margin-left:  0px; 
-  margin-right: 0px; 
-  padding-left: 0px; 
-  padding-right:0px;
-  
+  margin-left: 0px;
+  margin-right: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
 }
-
 </style>
