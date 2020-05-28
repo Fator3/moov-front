@@ -10,6 +10,7 @@ import DateFilter from './filters/date'
 import vuetify from './plugins/vuetify'
 import ScrollLoader from 'vue-scroll-loader'
 import VueAnalytics from 'vue-analytics'
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 Vue.filter('date', DateFilter)
 Vue.use(Vuelidate)
@@ -17,29 +18,29 @@ Vue.config.productionTip = false
 Vue.use(ScrollLoader)
 
 Vue.use(VueAnalytics, {
-  id: 'UA-162394288-1',
-  router
+    id: 'UA-162394288-1',
+    router
 })
 
 const requireComponent = require.context(
-  './components',
-  false,
-  /Base[A-Z]\w+\.(vue|js)$/
+    './components',
+    false,
+    /Base[A-Z]\w+\.(vue|js)$/
 )
 
 requireComponent.keys().forEach(fileName => {
-  const componentConfig = requireComponent(fileName)
+    const componentConfig = requireComponent(fileName)
 
-  const componentName = upperFirst(
-    camelCase(fileName.replace(/^\.\/(.*)\.\w+$/, '$1'))
-  )
+    const componentName = upperFirst(
+        camelCase(fileName.replace(/^\.\/(.*)\.\w+$/, '$1'))
+    )
 
-  Vue.component(componentName, componentConfig.default || componentConfig)
+    Vue.component(componentName, componentConfig.default || componentConfig)
 })
 
 new Vue({
-  vuetify,
-  router,
-  store,
-  render: h => h(App)
+    vuetify,
+    router,
+    store,
+    render: h => h(App)
 }).$mount('#app')

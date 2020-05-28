@@ -10,8 +10,8 @@
       </v-slide-item>
     </v-slide-group>
     <v-sheet class="content">
-      <v-row>
-        <v-col class="d-flex flex-column align-start mr-12">
+      <v-row class="d-flex align-center">
+        <v-col class="d-flex flex-column align-start" xs="12" sm="12" md="9">
           <span class="breadcrumb mb-4">
             {{
               `Início > ${property.city} > ${property.district} > ${property.agencyReference}`
@@ -20,7 +20,13 @@
           <span class="font-weight-bold">{{ property.type }}</span>
           <v-dialog v-model="showMap">
             <template v-slot:activator="{ on }">
-              <v-btn color="primary" class="text-none my-2" large v-on="on" @click="$ga.event('button', 'click', 'map')">
+              <v-btn
+                color="primary"
+                class="text-none my-2"
+                large
+                v-on="on"
+                @click="$ga.event('button', 'click', 'map')"
+              >
                 <v-img src="@/assets/images/icon_map.png" class="mr-2" />
                 <span class="mt-1">Mapa</span>
               </v-btn>
@@ -58,10 +64,14 @@
               <span class="info-value ml-1">{{ info.value(property) }}</span>
             </v-sheet>
           </v-sheet>
-          <v-sheet class="d-flex mt-5">
+          <v-sheet
+            class="d-flex mt-5"
+            :class="{ 'flex-column': $vuetify.breakpoint.xs }"
+          >
             <v-sheet
               v-for="(reference, index) in property.references"
-              class="time-chip d-flex flex-column text-center py-1 px-5 mr-4 primary--text"
+              class="time-chip d-flex flex-column text-center py-1 px-5 primary--text"
+              :class="$vuetify.breakpoint.xs ? 'mb-4' : 'mr-4'"
               :key="'ref' + index"
             >
               <v-sheet
@@ -91,31 +101,31 @@
             comodidade e fica situado em ótima localização.
           </p>
         </v-col>
-        <v-col cols="4" class="ml-12">
-          <v-sheet class="contact pa-4 d-flex flex-column align-center">
+        <v-col class="align-center" xs="12" sm="12" md="3" lg="3">
+          <v-sheet class="contact d-flex flex-column align-center box-sizing">
             <v-img src="@/assets/images/logo.png" height="30" contain />
             <span class="primary--text mt-2 mb-8">(11) 98787-0203</span>
-            <v-row justify="space-between" class="tax-info" dense no-gutters
-              ><v-col>Venda</v-col
-              ><v-col class="text-right">{{
+            <v-row justify="space-between" class="tax-info" dense
+              ><v-col class="d-flex flex-column">Venda</v-col
+              ><v-col class="d-flex flex-column text-right">{{
                 formatMoney(property.sellPrice)
               }}</v-col></v-row
             >
-            <v-row justify="space-between" class="tax-info" dense no-gutters
-              ><v-col>Aluguel</v-col
-              ><v-col class="text-right">{{
+            <v-row justify="space-between" class="tax-info" dense
+              ><v-col class="d-flex flex-column">Aluguel</v-col
+              ><v-col class="d-flex flex-column text-right">{{
                 formatMoney(property.rentalPrice)
               }}</v-col></v-row
             >
-            <v-row justify="space-between" class="tax-info" dense no-gutters
-              ><v-col>Condomínio</v-col
-              ><v-col class="text-right">{{
+            <v-row justify="space-between" class="tax-info" dense
+              ><v-col class="d-flex flex-column">Condomínio</v-col
+              ><v-col class="d-flex flex-column text-right">{{
                 formatMoney(property.complexFee)
               }}</v-col></v-row
             >
-            <v-row justify="space-between" class="tax-info" dense no-gutters
-              ><v-col>IPTU</v-col
-              ><v-col class="text-right">{{
+            <v-row justify="space-between" class="tax-info" dense
+              ><v-col class="d-flex flex-column">IPTU</v-col
+              ><v-col class="d-flex flex-column text-right">{{
                 formatMoney(property.propertyTax)
               }}</v-col></v-row
             >
@@ -126,16 +136,19 @@
               dense
               no-gutters
               align="center"
-              ><v-col>Total</v-col
+              ><v-col class="d-flex flex-column">Total</v-col
               ><v-col
-                class="text-right price"
+                class="d-flex flex-column text-right sm-text price"
                 v-html="formatPrice(property)"
               ></v-col
             ></v-row>
             <v-btn
               color="primary"
               class="text-none mt-6"
-              @click.stop="$ga.event('button', 'click', 'contact-top'); showForm = true"
+              @click.stop="
+                $ga.event('button', 'click', 'contact-top')
+                showForm = true
+              "
               >Contatar anunciante</v-btn
             >
           </v-sheet>
@@ -201,19 +214,25 @@
           </v-col>
         </v-row>
       </v-container>
-      <v-divider width="100%" color="#D8D8D8" />
-      <v-container class="pt-6" fluid>
+      <v-divider width="100%" color="#D8D8D8"></v-divider>
+      <div class="py-6 px-4">
         <span class="section-title">Imóveis similares</span>
-        <PropertyScroll :properties="similarProperties" class="my-2" />
-      </v-container>
+      </div>
+    </v-sheet>
+
+    <PropertyScroll :properties="similarProperties" clas="my-2" />
+    <v-sheet>
       <v-container class="d-flex flex-column align-center my-12" fluid>
-        <span class="bottom-text"
+        <span class="bottom-text text-center"
           >Você ficou com alguma dúvida sobre esse anúncio?</span
         >
         <v-btn
           color="primary"
           class="text-none mt-6"
-          @click.stop="$ga.event('button', 'click', 'contact-bottom'); showForm = true"
+          @click.stop="
+            $ga.event('button', 'click', 'contact-bottom')
+            showForm = true
+          "
           >Contatar anunciante</v-btn
         >
       </v-container>
@@ -356,16 +375,16 @@ export default {
           (this.similarProperties = res.data.map(p => this.getRandomPics(p)))
       )
   },
-  mounted(){
-    window.scrollTo(0,0);
+  mounted() {
+    window.scrollTo(0, 0)
   },
   methods: {
     sendMessage() {
       this.$ga.event('button', 'click', 'send-message', {
-        'dimension5': this.leadMessage.name,
-        'dimension6': this.leadMessage.email,
-        'dimension7': this.leadMessage.phone,
-        'dimension8': this.leadMessage.message
+        dimension5: this.leadMessage.name,
+        dimension6: this.leadMessage.email,
+        dimension7: this.leadMessage.phone,
+        dimension8: this.leadMessage.message
       })
       this.message = ''
       this.loading = true
@@ -568,6 +587,14 @@ export default {
   height: 600px;
   max-width: 1200px;
   width: 100%;
+}
+.box-sizing {
+  padding: 12px 12px;
+}
+@media screen and (max-width: 600px) {
+  .sm-text {
+    font-size: 24px;
+  }
 }
 </style>
 <style>

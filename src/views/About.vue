@@ -1,58 +1,109 @@
 <template>
   <v-container class="ma-0 pa-0 wrapper" fluid>
-    <v-sheet id="headline" class="display-2">
-      <span id="spacing-text" class="text-style">A nossa missão é te possibilitar viver<br />
+    <v-sheet id="headline" class="display-2 align-center">
+      <span id="spacing-text" class="text-style pa-right"
+        >A nossa missão é te possibilitar viver<br />
         da melhor forma que pode!<br />
         Do seu jeito. <br />
-        De acordo com suas necessidades.</span>
-      <span class="text-style secondary--text">O tempo é agora. Bora viver? </span>
+        De acordo com suas necessidades.</span
+      >
+      <span class="text-style secondary--text pa-right"
+        >O tempo é agora. Bora viver?
+      </span>
     </v-sheet>
     <v-sheet class="display-2">
-      <v-row no-gutters>
-        <v-col class="d-flex flex-column mb-6 align-center">
-          <span class="text-style-secondary" style="padding-right:15%;">Somos uma plataforma<br />
+      <v-row class="d-flex align-center">
+        <v-col
+          class="d-flex flex-column align-center"
+          xs="12"
+          sm="12"
+          md="6"
+          lg="6"
+          style="padding-bottom:50px;"
+        >
+          <span class="text-style-secondary pa-left pa-bottom"
+            >Somos uma plataforma<br />
             desenvolvida para você<br />
             encontrar o melhor lugar <br />
             para viver!
           </span>
         </v-col>
-        <v-col class="d-flex flex-column mb-6 align-center" style="padding-bottom:50px;">
-          <div class="img-container">
-            <img src="../assets/images/about-girl.png" class="img-align-left">
-            <div class="rect-after"></div>
-          </div>
+        <v-col
+          class="d-flex flex-column align-center mb-10"
+          xs="12"
+          sm="12"
+          md="6"
+          lg="6"
+        >
+          <v-img src="../assets/images/about-girl.png" class="" />
         </v-col>
       </v-row>
       <v-divider></v-divider>
-      <v-row class="d-flex flex-row align-center">
-        <v-col class="d-flex flex-column justify-center mb-3">
-          <img class="img-icon-size" src="../assets/images/icon-confort.png" style="width: 72.76px" />
+      <v-row class="d-flex align-center" no-gutters="">
+        <v-col
+          class="d-flex flex-column justify-center "
+          xs="12"
+          sm="6"
+          md="3"
+          lg="3"
+        >
+          <v-img
+            class="img-icon-size"
+            src="../assets/images/icon-confort.png"
+            style="width: 72.76px"
+          />
           <span class="text-icon">Conforto</span>
         </v-col>
-        <v-col class="d-flex flex-column justify-center mb-3">
-          <img class="img-icon-size" src="../assets/images/icon-safety.png" />
+        <v-col
+          class="d-flex flex-column justify-center "
+          xs="12"
+          sm="6"
+          md="3"
+          lg="3"
+        >
+          <v-img class="img-icon-size" src="../assets/images/icon-safety.png" />
           <span class="text-icon">Segurança</span>
         </v-col>
-        <v-col class="d-flex flex-column justify-center mb-3">
-          <img class="img-icon-size" src="../assets/images/icon-key.png" />
+        <v-col
+          class="d-flex flex-column justify-center "
+          xs="12"
+          sm="6"
+          md="3"
+          lg="3"
+        >
+          <v-img class="img-icon-size" src="../assets/images/icon-key.png" />
           <span class="text-icon">Facilidade</span>
         </v-col>
-        <v-col class="d-flex flex-column justify-center mb-3">
-          <img src="../assets/images/icon-home.png" class="img-icon-size" />
+        <v-col
+          class="d-flex flex-column justify-center "
+          xs="12"
+          sm="6"
+          md="3"
+          lg="3"
+        >
+          <v-img src="../assets/images/icon-home.png" class="img-icon-size" />
           <span class="text-icon">Novo lar</span>
         </v-col>
       </v-row>
       <v-divider></v-divider>
-      <v-row no-gutters="">
-        <v-col class="d-flex flex-column mb-6 md-6 pa-6">
-          <div class="rect-before">
-            <div class="img-container-over ">
-              <img src="../assets/images/couple.png" />
-            </div>
-          </div>
+      <v-row class="d-flex align-center">
+        <v-col
+          class="d-flex flex-column align-center mt-12 "
+          xs="12"
+          sm="12"
+          md="6"
+          lg="6"
+        >
+          <v-img src="../assets/images/couple.png" class="" />
         </v-col>
-        <v-col class="d-flex flex-column mb-6 md-6 pa-6 align-center">
-          <span class="text-style-secondary" style="padding-top: 20%;">
+        <v-col
+          class="d-flex flex-column align-center"
+          xs="12"
+          sm="12"
+          md="6"
+          lg="6"
+        >
+          <span class="text-style-secondary pa-left pa-bottom">
             Nosso objetivo é ajudar você <br />
             a encontrar o imóvel ideal, no <br />
             lugar que tem a sua cara!
@@ -61,40 +112,68 @@
       </v-row>
     </v-sheet>
     <v-divider style="margin-top: 6%; margin-bottom:4%;"></v-divider>
-    <v-row no-gutters class="d-flex flex-row align-center">
-      <span class="text-style-tertiary">
+    <v-row no-gutters class="d-flex align-center">
+      <span class="text-style-tertiary pa-left">
         <span>Então,</span> qual vida você quer viver?
       </span>
     </v-row>
     <v-divider style="margin-top: 4%;"></v-divider>
-    <v-row no-gutters class="d-flex flex-row text-style-tertiary align-center">
-      <v-col class="d-flex flex-col justify-center" style="padding-top:5%; padding-bottom:3%;">
-        <span >Fundadores</span>
+    <v-row no-gutters class="d-flex text-style-tertiary align-center">
+      <v-col
+        class="d-flex flex-col justify-center"
+        style="padding-top:5%; padding-bottom:3%;"
+      >
+        <span>Fundadores</span>
       </v-col>
     </v-row>
-    <v-row no-gutters class="d-flex flex-row align-center spacing-row">
-      <v-col class="d-flex flex-col justify-center mb-4">
+    <v-row no-gutters class="d-flex align-center sm-stack">
+      <v-col
+        class="d-flex flex-col justify-center mb-12"
+        xs="12"
+        sm="12"
+        md="4"
+      >
         <div>
-            <img class="img-founders" src="../assets/images/handall.png">
-            <span class="d-flex justify-center text-name-founders">Handall</span>
-            <div class="d-flex justify-center">
-              <span class="text-part-founders">Co-Founder</span>
-            </div>
+          <img class="img-founders" src="../assets/images/handall.png" />
+          <span class="d-flex justify-center text-name-founders">Handall</span>
+          <div class="d-flex justify-center">
+            <span class="text-part-founders">Co-Founder</span>
+          </div>
         </div>
       </v-col>
-      <v-col class="d-flex flex-col justify-center mb-4">
+      <v-col
+        class="d-flex flex-col justify-center mb-12"
+        xs="12"
+        sm="12"
+        md="4"
+      >
         <div>
-          <img class="img-founders img-founder-align" src="../assets/images/andre.png">
-          <span class=" d-flex justify-center text-name-founders">André Filipe Freitas</span>
+          <img
+            class="img-founders img-founder-align"
+            src="../assets/images/andre.png"
+          />
+          <span class=" d-flex justify-center text-name-founders"
+            >André Filipe Freitas</span
+          >
           <div class="d-flex justify-center">
             <span class="text-part-founders">Founder</span>
           </div>
         </div>
       </v-col>
-      <v-col class="d-flex flex-col justify-center mb-4">
+      <v-col
+        class="d-flex flex-col justify-center mb-12"
+        xs="12"
+        sm="12"
+        md="4"
+      >
         <div>
-          <img class="img-founders img-founder-align" src="../assets/images/alexandre.png">
-          <span class="d-flex justify-center text-name-founders">Alexandre Martins</span>
+          <img
+            class="img-founders img-founder-align"
+            src="../assets/images/alexandre.png"
+          />
+          <span class="d-flex justify-center text-name-founders"
+            >Alexandre Martins</span
+          >
           <div class="d-flex justify-center">
             <span class="text-part-founders">Co-Founder</span>
           </div>
@@ -151,7 +230,7 @@ export default {}
   line-height: 41px;
   letter-spacing: 1.02px;
   margin-top: 10%;
-  color: #7F56C3;
+  color: #7f56c3;
 }
 .bottom-text {
   font-weight: normal;
@@ -166,18 +245,19 @@ export default {}
 }
 .img-container {
   left: 8%;
-  width: 380px;
+  width: 100%;
+  max-width: 380px;
   height: 430px;
-  background-color: #7F56C3;
+  background-color: #7f56c3;
   position: relative;
   padding-top: 37px;
   padding-left: 25px;
 }
 .rect-after {
   position: absolute;
-  width: 380px;
+  width: 100%;
   height: 430px;
-  border: 2px solid #34B6F2;
+  border: 2px solid #34b6f2;
   top: 20px;
   right: 20px;
 }
@@ -185,7 +265,7 @@ export default {}
   position: relative;
   width: 380px;
   height: 430px;
-  border: 2px solid #34B6F2;
+  border: 2px solid #34b6f2;
   top: 50px;
   left: 15%;
 }
@@ -194,7 +274,7 @@ export default {}
   right: 20px;
   width: 380px;
   height: 430px;
-  background-color: #7F56C3;
+  background-color: #7f56c3;
   position: absolute;
   padding-top: 84px;
 }
@@ -216,11 +296,11 @@ export default {}
   letter-spacing: 1.02px;
   margin-left: auto;
   margin-right: auto;
-  color: #34B6F2;
+  color: #34b6f2;
   padding-top: 4%;
 }
 .text-style-tertiary {
-  color: #34B6F2;
+  color: #34b6f2;
   font-style: bold;
   font-size: 35px;
   font-family: Roboto;
@@ -228,7 +308,7 @@ export default {}
   margin: auto;
 }
 .text-style-tertiary span {
-  color:#7F56C3;
+  color: #7f56c3;
   font-size: 35px;
 }
 .img-founders {
@@ -252,9 +332,28 @@ export default {}
   font-size: 20px;
   line-height: 23px;
   letter-spacing: 1.02px;
-  color: #7F56C3;
+  color: #7f56c3;
 }
 .img-founder-align {
   margin-left: 15%;
+}
+
+.couple-center {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+@media screen and (max-width: 600px) {
+  .pa-right {
+    padding-right: 4%;
+  }
+  .pa-left {
+    padding-left: 4%;
+  }
+  .pa-bottom {
+    padding-bottom: 5%;
+  }
+  .sm-stack {
+    flex-direction: column;
+  }
 }
 </style>
