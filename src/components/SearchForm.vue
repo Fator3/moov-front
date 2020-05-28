@@ -1,7 +1,7 @@
 <template>
-  <v-sheet id="search-form" class="form-align">
-    <v-row class="d-flex mx-0 ">
-      <v-col class="d-flex flex-column md4 sm6 lg4 pb-0"
+  <v-sheet id="search-form">
+    <v-row class="mx-0">
+      <v-col class="pb-0" :cols="$vuetify.breakpoint.smAndUp ? 4 : 12"
         ><label>O que você precisa?</label
         ><v-select
           solo
@@ -13,8 +13,8 @@
           v-model="searchParams.isRent"
         ></v-select
       ></v-col>
-      <v-col class="d-flex flex-column md4 sm6 pb-0"
-        ><label >Qual tipo?</label
+      <v-col class="pb-0" :cols="$vuetify.breakpoint.smAndUp ? 4 : 12"
+        ><label>Qual tipo?</label
         ><v-select
           solo
           :items="['Apartamento', 'Casa', 'Comercial']"
@@ -22,8 +22,8 @@
           v-model="searchParams.type"
         ></v-select
       ></v-col>
-      <v-col class="d-flex flex-column md4 sm6 pb-0"
-        ><label >Onde procura seu imóvel?</label
+      <v-col class="pb-0" :cols="$vuetify.breakpoint.smAndUp ? 4 : 12"
+        ><label>Onde procura seu imóvel?</label
         ><v-autocomplete
           solo
           v-model="searchParams.city"
@@ -42,9 +42,10 @@
     <v-row
       v-for="(reference, index) in references"
       :key="'ref' + index"
-      class="d-flex reference-row mx-0"
+      class="reference-row mx-0"
+      :class="{ 'mb-4': $vuetify.breakpoint.xs }"
     >
-      <v-col class="d-flex flex-column md4 sm6 pb-5"
+      <v-col class="pb-0" :cols="$vuetify.breakpoint.smAndUp ? 4 : 12"
         ><label v-if="index == 0">Ponto de referência</label
         ><v-text-field
           solo
@@ -60,7 +61,7 @@
           >
         </v-text-field></v-col
       >
-      <v-col class="d-flex flex-column md4 sm6  pb-5"
+      <v-col class="pb-0" :cols="$vuetify.breakpoint.smAndUp ? 4 : 12"
         ><label v-if="index == 0">Tempo em minutos</label
         ><v-text-field
           solo
@@ -68,7 +69,7 @@
           v-model="reference.time"
         ></v-text-field
       ></v-col>
-      <v-col class="d-flex flex-column md4 sm6 pb-5"
+      <v-col class="pb-0" :cols="$vuetify.breakpoint.smAndUp ? 4 : 12"
         ><label v-if="index == 0">Meio de transporte</label
         ><v-select
           solo
@@ -82,17 +83,20 @@
         ></v-select
       ></v-col>
     </v-row>
-    <v-row class="d-flex mx-0">
-      <v-col></v-col>
-      <v-col></v-col>
-      <v-col 
-        class="d-flex justify-space-between search-buttons"
-        :class="{ 'flex-column' : $vuetify.breakpoint.xs }">
+    <v-row class="mx-0 mt-1" justify="end">
+      <v-col
+        md="4"
+        lg="4"
+        sm="8"
+        xs="12"
+        class="d-flex search-buttons mb-8"
+        :class="{ 'flex-column': $vuetify.breakpoint.xs }"
+      >
         <v-btn
           color="white"
           large
           class="text-none flex-grow-1"
-          :class="{ 'mr-3' : $vuetify.breakpoint.smAndUp }"
+          :class="$vuetify.breakpoint.smAndUp ? 'mr-3' : 'mb-3'"
           @click="clean()"
           >Limpar</v-btn
         >
@@ -100,7 +104,6 @@
           color="primary"
           large
           class="text-none flex-grow-1"
-          :class="{ 'mt-3' : $vuetify.breakpoint.xs }"
           @click="searchProperties()"
           >Buscar</v-btn
         >
@@ -279,12 +282,6 @@ export default {
 label {
   display: block;
   position: relative;
-}
-
-@media screen and (max-width: 600px) {
-  .row {
-    flex-direction: column;
-  }
 }
 </style>
 <style>

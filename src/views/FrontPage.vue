@@ -1,6 +1,5 @@
 <template>
   <v-container class="ma-0 pa-0 wrapper" fluid>
-    <v-row class="">
     <v-sheet id="search">
       <v-sheet id="headline" class="display-2">
         <span class="white--text">O tempo é agora. </span
@@ -8,7 +7,6 @@
       </v-sheet>
       <SearchForm v-on:search="listProperties" :origin="'firstPage'" />
     </v-sheet>
-    </v-row>
     <ConceptVideo />
     <PropertyScroll
       :title="'Lançamentos'"
@@ -27,13 +25,27 @@
     />
     <v-sheet class="d-flex justify-space-between primary--text bottom" fluid>
       <v-row class="d-flex flex-row align-center sm-stack" no-gutters>
-        <v-col class="d-flex flex-column align-start justify-space-between primary--text " xs="12" sm="12" md="6" lg="6">
-          <span class="bottom-text">Estamos aqui pra ajudar em suas escolhas</span>
+        <v-col
+          class="d-flex flex-column align-start justify-space-between primary--text "
+          xs="12"
+          sm="12"
+          md="6"
+          lg="6"
+        >
+          <span class="bottom-text"
+            >Estamos aqui pra ajudar em suas escolhas</span
+          >
         </v-col>
-        <v-col class="d-flex flex-column align-end justify-space-between primary--text " xs="12" sm="12" md="6" lg="6">
+        <v-col
+          class="d-flex flex-column align-end justify-space-between primary--text "
+          xs="12"
+          sm="12"
+          md="6"
+          lg="6"
+        >
           <span><b>Anuncie com a NuDoor:</b> anuncie@nudoor.com.br</span>
         </v-col>
-    </v-row>      
+      </v-row>
     </v-sheet>
   </v-container>
 </template>
@@ -122,6 +134,7 @@ export default {
   position: relative;
 }
 #search {
+  height: auto;
   width: 100% !important;
   max-width: 100% !important;
   min-height: 770px;
@@ -159,5 +172,4 @@ export default {
     flex-direction: column;
   }
 }
-
 </style>

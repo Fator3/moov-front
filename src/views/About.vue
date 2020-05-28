@@ -119,65 +119,25 @@
     </v-row>
     <v-divider style="margin-top: 4%;"></v-divider>
     <v-row no-gutters class="d-flex text-style-tertiary align-center">
-      <v-col
-        class="d-flex flex-col justify-center"
-        style="padding-top:5%; padding-bottom:3%;"
-      >
+      <v-col class="text-center" style="padding-top:5%; padding-bottom:3%;">
         <span>Fundadores</span>
       </v-col>
     </v-row>
-    <v-row no-gutters class="d-flex align-center sm-stack">
-      <v-col
-        class="d-flex flex-col justify-center mb-12"
-        xs="12"
-        sm="12"
-        md="4"
-      >
-        <div>
-          <img class="img-founders" src="../assets/images/handall.png" />
-          <span class="d-flex justify-center text-name-founders">Handall</span>
-          <div class="d-flex justify-center">
-            <span class="text-part-founders">Co-Founder</span>
-          </div>
-        </div>
+    <v-row no-gutters class="d-flex align-center" align="center">
+      <v-col class="d-flex flex-column justify-center mb-12 align-center">
+        <v-img src="../assets/images/handall.png" />
+        <span class="text-name-founders">Handall</span>
+        <span class="text-part-founders">Co-Founder</span>
       </v-col>
-      <v-col
-        class="d-flex flex-col justify-center mb-12"
-        xs="12"
-        sm="12"
-        md="4"
-      >
-        <div>
-          <img
-            class="img-founders img-founder-align"
-            src="../assets/images/andre.png"
-          />
-          <span class=" d-flex justify-center text-name-founders"
-            >André Filipe Freitas</span
-          >
-          <div class="d-flex justify-center">
-            <span class="text-part-founders">Founder</span>
-          </div>
-        </div>
+      <v-col class="d-flex flex-column justify-center mb-12 align-center">
+        <v-img src="../assets/images/andre.png" />
+        <span class="text-name-founders">André Filipe Freitas</span>
+        <span class="text-part-founders">Founder</span>
       </v-col>
-      <v-col
-        class="d-flex flex-col justify-center mb-12"
-        xs="12"
-        sm="12"
-        md="4"
-      >
-        <div>
-          <img
-            class="img-founders img-founder-align"
-            src="../assets/images/alexandre.png"
-          />
-          <span class="d-flex justify-center text-name-founders"
-            >Alexandre Martins</span
-          >
-          <div class="d-flex justify-center">
-            <span class="text-part-founders">Co-Founder</span>
-          </div>
-        </div>
+      <v-col class="d-flex flex-column justify-center mb-12 align-center">
+        <v-img src="../assets/images/alexandre.png" />
+        <span class="text-name-founders">Alexandre Martins</span>
+        <span class="text-part-founders">Co-Founder</span>
       </v-col>
     </v-row>
   </v-container>
@@ -253,22 +213,6 @@ export default {}
   padding-top: 37px;
   padding-left: 25px;
 }
-.rect-after {
-  position: absolute;
-  width: 100%;
-  height: 430px;
-  border: 2px solid #34b6f2;
-  top: 20px;
-  right: 20px;
-}
-.rect-before {
-  position: relative;
-  width: 380px;
-  height: 430px;
-  border: 2px solid #34b6f2;
-  top: 50px;
-  left: 15%;
-}
 .img-container-over {
   bottom: 20px;
   right: 20px;
@@ -311,10 +255,6 @@ export default {}
   color: #7f56c3;
   font-size: 35px;
 }
-.img-founders {
-  width: 190px;
-  height: 190px;
-}
 .text-name-founders {
   font-family: Roboto;
   font-style: normal;
@@ -334,9 +274,6 @@ export default {}
   letter-spacing: 1.02px;
   color: #7f56c3;
 }
-.img-founder-align {
-  margin-left: 15%;
-}
 
 .couple-center {
   margin-top: auto;
@@ -351,9 +288,6 @@ export default {}
   }
   .pa-bottom {
     padding-bottom: 5%;
-  }
-  .sm-stack {
-    flex-direction: column;
   }
 }
 </style>

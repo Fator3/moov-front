@@ -7,7 +7,7 @@
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
         <v-btn
-           v-for="link in links"
+          v-for="link in links"
           :key="`${link.label}-header-link`"
           class="text-none"
           text
@@ -15,35 +15,38 @@
           :to="link.url"
           active-class="active"
           :depressed="false"
-          @click="$ga.event('link', 'click', link.event)">
-        {{ link.label }}
+          @click="$ga.event('link', 'click', link.event)"
+        >
+          {{ link.label }}
         </v-btn>
       </v-toolbar-items>
-      <v-app-bar-nav-icon 
-        class="hidden-md-and-up"
-        @click="toggleMenu">
+      <v-app-bar-nav-icon class="hidden-md-and-up" @click="toggleMenu">
       </v-app-bar-nav-icon>
     </v-app-bar>
     <Drawer @close="toggleMenu" align="left" :closeable="true">
-        <div v-if="showMenu">
-          <v-list >
-            <v-list-item-group v-model="item" color="primary">
-              <v-list-item
+      <div v-if="showMenu">
+        <v-list>
+          <v-list-item-group v-model="item" color="primary">
+            <v-list-item
               v-for="(link, i) in links"
               :key="i"
               :to="link.url"
-              @click="$ga.event('link', 'click', link.event)" >
-                <v-list-item-icon>
-                  <v-icon>{{link.icon}}</v-icon>
-                </v-list-item-icon>
-                <v-list-item-content>
-                  <v-list-item-title v-text="link.label"></v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-            </v-list-item-group>
-          </v-list>
-        </div>
-      </Drawer>
+              @click="
+                $ga.event('link', 'click', link.event)
+                showMenu = false
+              "
+            >
+              <v-list-item-icon>
+                <v-icon>{{ link.icon }}</v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title v-text="link.label"></v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list-item-group>
+        </v-list>
+      </div>
+    </Drawer>
     <v-content>
       <router-view></router-view>
     </v-content>
@@ -56,7 +59,7 @@
 <script>
 import Footer from '@/components/Footer.vue'
 import Drawer from 'vue-simple-drawer'
-import "./demo.scss";
+import './demo.scss'
 
 export default {
   name: 'App',
