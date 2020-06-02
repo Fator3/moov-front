@@ -53,6 +53,14 @@
           v-model="reference.address"
         >
           <v-icon
+            v-if="references.length > 1"
+            slot="append"
+            color="primary"
+            @click="references.splice(index, 1)"
+            title="Remover referência"
+            >mdi-minus-circle-outline</v-icon
+          >
+          <v-icon
             slot="append"
             color="primary"
             @click="addReference()"

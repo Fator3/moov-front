@@ -139,7 +139,7 @@ export default {
 
       if (price == 0) return 'Sob consulta'
       else {
-        return `R$ ${price}<span class="subtitle-2"> ${
+        return `R$ ${price.toLocaleString('pt-BR')}<span class="subtitle-2"> ${
           this.localIsRent ? '/ mês' : ''
         }</span>`
       }
@@ -147,7 +147,7 @@ export default {
     formatMoney(value) {
       if (value == 0) return 'Sob consulta'
       else {
-        return `R$ ${value}`
+        return `R$ ${value.toLocaleString('pt-BR')}`
       }
     }
   }

@@ -2,11 +2,13 @@
   <v-container class="wrapper" fluid>
     <v-row class="d-flex flex-row justify-space-between footer">
       <v-col class="d-flex flex-column align-start mb-4">
-        <v-img
-          src="@/assets/images/logo.png"
-          class="flex-grow-0 mb-8 flex-shrink-1 pa-0 mx-0"
-        />
-        <span> (11) 98787-0203</span> 
+        <router-link to="/">
+          <v-img
+            src="@/assets/images/logo.png"
+            class="flex-grow-0 mb-8 flex-shrink-1 pa-0 mx-0"
+          />
+        </router-link>
+        <span>(11) 99724-1992</span>
         <span>contato@nudoor.com.br </span>
         <v-sheet color="transparent" class="mt-4">
           <span class="primary--text">O tempo é agora. <br /></span
@@ -16,16 +18,35 @@
         >
         <span class="mt-4 font-weight-bold">Siga-nos:</span>
         <v-sheet class="d-flex mt-2 align-center" color="transparent">
-          <v-img src="@/assets/images/icon_facebook.png" class="mr-4" />
-          <v-img src="@/assets/images/icon_instagram.png" class="mr-4" />
-          <v-img src="@/assets/images/icon_linkedin.png" />
+          <a href="https://www.facebook.com/nudoor" target="_blank">
+            <v-img src="@/assets/images/icon_facebook.png" class="mr-4" />
+          </a>
+          <a href="https://www.instagram.com/nudoor.com.br/" target="_blank">
+            <v-img src="@/assets/images/icon_instagram.png" class="mr-4" />
+          </a>
+          <a href="https://www.linkedin.com/company/nudoor" target="_blank">
+            <v-img src="@/assets/images/icon_linkedin.png" />
+          </a>
         </v-sheet>
       </v-col>
-      
+
       <v-col class="links d-flex flex-column align-center">
         <div class="d-flex flex-column align-start pr-12">
-          <v-btn light text to="/" class="text-none" @click="$ga.event('link', 'click', 'home-footer')">Início</v-btn>
-          <v-btn text to="/about" class="text-none" @click="$ga.event('link', 'click', 'about-footer')">Quem somos?</v-btn>
+          <v-btn
+            light
+            text
+            to="/"
+            class="text-none"
+            @click="$ga.event('link', 'click', 'home-footer')"
+            >Início</v-btn
+          >
+          <v-btn
+            text
+            to="/about"
+            class="text-none"
+            @click="$ga.event('link', 'click', 'about-footer')"
+            >Quem somos?</v-btn
+          >
         </div>
       </v-col>
     </v-row>
