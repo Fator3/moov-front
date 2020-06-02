@@ -2,8 +2,13 @@
   <v-app>
     <v-app-bar app color="white" height="80">
       <v-toolbar-title id="logo"
-        ><v-img height="42" src="./assets/images/logo.png" contain
-      /></v-toolbar-title>
+        ><router-link to="/"
+          ><v-img
+            height="42"
+            src="./assets/images/logo.png"
+            contain
+            to="/"/></router-link
+      ></v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
         <v-btn

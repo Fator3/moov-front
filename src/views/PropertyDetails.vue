@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid class="pa-0 ma-0 d-flex flex-column">
+  <v-container fluid class="pa-0 ma-0 d-flex flex-column" v-if="property">
     <v-slide-group class="align-self-center" ref="top">
       <v-slide-item
         v-for="(pic, index) in property.pics"
@@ -104,7 +104,7 @@
         <v-col class="align-center" xs="12" sm="12" md="3" lg="3">
           <v-sheet class="contact d-flex flex-column align-center box-sizing">
             <v-img src="@/assets/images/logo.png" height="30" contain />
-            <span class="primary--text mt-2 mb-8">(11) 98787-0203</span>
+            <span class="primary--text mt-2 mb-8">(11) 99724-1992</span>
             <v-row justify="space-between" class="tax-info" dense
               ><v-col class="d-flex flex-column">Venda</v-col
               ><v-col class="d-flex flex-column text-right">{{
@@ -241,7 +241,7 @@
       <v-card class="font-weight-medium d-flex flex-column primary--text pa-12">
         <v-img src="@/assets/images/logo.png" height="30" contain />
         <span class="primary--text mt-2 mb-8 align-self-center"
-          >(11) 98787-0203</span
+          >(11) 99724-1992</span
         >
         <v-form ref="form" v-model="valid">
           <label class="my-1">Nome</label>
@@ -368,12 +368,18 @@ export default {
     }
   },
   created() {
-    nudoor
-      .getRandomNProperties(12)
-      .then(
-        res =>
-          (this.similarProperties = res.data.map(p => this.getRandomPics(p)))
-      )
+    if (!this.property) {
+      this.$router.push({
+        path: '/'
+      })
+    } else {
+      nudoor
+        .getRandomNProperties(12)
+        .then(
+          res =>
+            (this.similarProperties = res.data.map(p => this.getRandomPics(p)))
+        )
+    }
   },
   mounted() {
     window.scrollTo(0, 0)
@@ -406,13 +412,15 @@ export default {
 
       if (property.rentalPrice == 0) return 'Sob consulta'
       else {
-        return `R$ ${price}<span class="subtitle-2">/ mês</span>`
+        return `R$ ${price.toLocaleString(
+          'pt-BR'
+        )}<span class="subtitle-2">/ mês</span>`
       }
     },
     formatMoney(value) {
       if (value == 0) return 'Sob consulta'
       else {
-        return `R$ ${value}`
+        return `R$ ${value.toLocaleString('pt-BR')}`
       }
     },
     getRandomPics(property) {

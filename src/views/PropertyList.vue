@@ -1,13 +1,13 @@
 <template>
-  <v-container class="ma-0 pa-0 wrapper" fluid>
+  <v-container class="ma-0 pa-0 wrapper" fluid v-if="searchParams">
     <v-row class="d-flex flex-row align-center">
-    <v-sheet id="search" class="py-8">
-      <SearchForm
-        :searchInput="searchParams"
-        :origin="'listPage'"
-        v-on:search="loadNewProperties"
-      />
-    </v-sheet>
+      <v-sheet id="search" class="py-8">
+        <SearchForm
+          :searchInput="searchParams"
+          :origin="'listPage'"
+          v-on:search="loadNewProperties"
+        />
+      </v-sheet>
     </v-row>
     <v-container fluid class="search-result pt-8">
       <span class="total">{{
@@ -162,7 +162,13 @@ export default {
     }
   },
   created() {
-    this.loadProperties(this.searchParams)
+    if (!this.searchParams) {
+      this.$router.push({
+        path: '/'
+      })
+    } else {
+      this.loadProperties(this.searchParams)
+    }
   }
 }
 </script>

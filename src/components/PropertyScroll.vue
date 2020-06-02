@@ -116,7 +116,9 @@ export default {
     formatPrice(price) {
       if (price == 0) return 'Sob consulta'
       else {
-        return `R$ ${price}<span class="subtitle-2"> / mês</span>`
+        return `R$ ${price.toLocaleString(
+          'pt-BR'
+        )}<span class="subtitle-2"> / mês</span>`
       }
     },
     openProperty(property) {
