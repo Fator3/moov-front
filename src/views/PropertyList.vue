@@ -103,7 +103,7 @@ export default {
 
         let property = {
           ...this.properties[this.currentIndex++],
-          references: this.references
+          references: [...this.references.map(ref => ({...ref}))]
         }
         const propertLocation = {
           latitude: property.latitude,
@@ -111,45 +111,22 @@ export default {
           secondsToArrive: 0
         }
 
-        // R. Job Lane, 811 - Jardim Petropolis, São Paulo - SP, 04639-001 => 10 => bus
-        // R. Miranda Guerra, 1530 - Jardim Petropolis, São Paulo - SP, 04640-001 => 30 => car   
-        
         const delay = interval =>
           new Promise(resolve => setTimeout(resolve, interval))
         await delay(500 * property.references.length)
 
         property.references.forEach(reference => {
-          
-          console.log('reference', reference)
-          
           const distancePost = {
             property: propertLocation,
             address: reference.address,
             transport: reference.transport,
             reference: reference.latLon
-            // routeTme: reference.routeTime
           }
-          console.log('distancePost', distancePost)
           PropertyService.getDistanceProperties(distancePost).then(result => {
-            console.log(result)
             const time = result.data[1].secondsToArrive / 60
-            // this.$set(reference, 'routeTime', 0)
             reference.routeTime = (time + '').split('.')[0]
           })
         })
-        /*
-        const distancePost = {
-          property: propertLocation,
-          address: reference.address,
-          transport: reference.transport
-        }
-        console.log("distancePost ", distancePost)
-
-        PropertyService.getDistanceProperties(property.references).then(result => {
-            const time = result.data[1].secondsToArrive / 60
-            reference.routeTime = (time + '').split('.')[0]
-        })*/
-        console.log("property ",property)
         this.loadedProperties.push(property)
       }
       this.isLoading = false
@@ -167,14 +144,9 @@ export default {
       PropertyService.getFilteredProperties(this.searchParams).then(
         response => {
           this.properties = response.data.properties.map(p => this.getRandomPics(p))
-          this.references = response.data.references
-
-          this.references.map(obj => {
-            console.log('obj', obj)
+          this.references = response.data.references.map(obj => {
             return {...obj, routeTime: 0}
           })
-
-          console.log(this.references)
           this.loadDistances()
         }
       )
