@@ -43,6 +43,15 @@ export default {
   data() {
     return {
       properties: [],
+      references: [
+        {
+          address: '',
+          time: '',
+          transport: '',
+          latLon: '',
+          routeTime: 0
+        }
+      ],
       loadedProperties: [],
       disable: false,
       maxIterations: 5,
@@ -85,6 +94,7 @@ export default {
     },
     async loadDistances() {
       this.isLoading = true
+ 
       for (var i = 0; i < this.maxIterations; i++) {
         if (this.currentIndex > this.properties.length - 1) {
           this.disable = true
@@ -93,13 +103,14 @@ export default {
 
         let property = {
           ...this.properties[this.currentIndex++],
-          references: this.searchParams.references.map(r => ({ ...r }))
+          references: [...this.references.map(ref => ({...ref}))]
         }
         const propertLocation = {
           latitude: property.latitude,
           longitude: property.longitude,
           secondsToArrive: 0
         }
+
         const delay = interval =>
           new Promise(resolve => setTimeout(resolve, interval))
         await delay(500 * property.references.length)
@@ -108,9 +119,9 @@ export default {
           const distancePost = {
             property: propertLocation,
             address: reference.address,
-            transport: reference.transport
+            transport: reference.transport,
+            reference: reference.latLon
           }
-
           PropertyService.getDistanceProperties(distancePost).then(result => {
             const time = result.data[1].secondsToArrive / 60
             reference.routeTime = (time + '').split('.')[0]
@@ -125,13 +136,17 @@ export default {
     },
     async loadProperties(searchParams) {
       this.properties = []
+      this.references = []
       this.loadedProperties = []
       this.disable = false
       this.currentIndex = 0
       this.searchParams = searchParams
       PropertyService.getFilteredProperties(this.searchParams).then(
         response => {
-          this.properties = response.data.map(p => this.getRandomPics(p))
+          this.properties = response.data.properties.map(p => this.getRandomPics(p))
+          this.references = response.data.references.map(obj => {
+            return {...obj, routeTime: 0}
+          })
           this.loadDistances()
         }
       )
