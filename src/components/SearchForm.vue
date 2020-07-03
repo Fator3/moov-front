@@ -49,7 +49,7 @@
         ><label v-if="index == 0">Ponto de referência</label
         ><v-text-field
           solo
-          placeholder="Adicione uma referência"
+          placeholder="Ex: Sua academia, seu trabalho, sua faculdade, metrô"
           v-model="reference.address"
         >
           <v-icon
@@ -73,6 +73,7 @@
         ><label v-if="index == 0">Tempo em minutos</label
         ><v-text-field
           solo
+          type="number"
           placeholder="Até a referência"
           v-model="reference.time"
         ></v-text-field
