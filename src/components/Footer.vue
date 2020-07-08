@@ -47,6 +47,14 @@
             @click="$ga.event('link', 'click', 'about-footer')"
             >Quem somos?</v-btn
           >
+          <v-btn
+            text
+            href="https://simulador.credihome.com.br/nudoor"
+            target="_blank"
+            class="text-none"
+            @click="$ga.event('link', 'click', 'financiamento-footer')"
+            >Financiamento</v-btn
+          >
         </div>
       </v-col>
     </v-row>

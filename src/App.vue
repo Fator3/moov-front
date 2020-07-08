@@ -18,6 +18,8 @@
           text
           color="#c2c2c2"
           :to="link.url"
+          :href="link.href"
+          :target="link.target"
           active-class="active"
           :depressed="false"
           @click="$ga.event('link', 'click', link.event)"
@@ -36,6 +38,8 @@
               v-for="(link, i) in links"
               :key="i"
               :to="link.url"
+              :href="link.href"
+              :target="link.target"
               @click="
                 $ga.event('link', 'click', link.event)
                 showMenu = false
@@ -65,6 +69,7 @@
 import Footer from '@/components/Footer.vue'
 import Drawer from 'vue-simple-drawer'
 import './demo.scss'
+import { mdiCashUsdOutline } from '@mdi/js'
 
 export default {
   name: 'App',
@@ -85,6 +90,13 @@ export default {
           label: 'Quem somos?',
           url: '/about',
           icon: 'info'
+        },
+        {
+          event: 'financiamento-header',
+          label: 'Financiamento',
+          href: 'https://simulador.credihome.com.br/nudoor',
+          target: '_blank',
+          icon: mdiCashUsdOutline
         }
       ]
     }
